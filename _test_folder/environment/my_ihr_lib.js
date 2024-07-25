@@ -1,9 +1,20 @@
 // default  is sleep 2 seconds
 // NOTE lower version js engine can not support the default parament syntax
 function sleep_certian_time(time_long) {
-    var true_time_long = time_long || 1000 * 2;
+    let true_time_long = time_long || 1000 * 2;
     sleep(true_time_long);
 }
+
+
+
+
+// NOTE  this version can not directly set a value  in a non-exist key in a object
+var ihrglobal = {};
+ihrglobal.miykstring = {};
+ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 10;
+ihrglobal.miykstring.sp1228 = "sp1228"
+ihrglobal.miykstring.leidian = "leidian"
+ihrglobal.miykstring.currentDevice = "sp1228";
 
 //BZ
 function stay_home_page_with_unlock() {
@@ -34,9 +45,66 @@ function page_recent_app(params) {
 }
 
 function gesture_kill_current_app_on_the_recents_page() {
-    gesture_kill_current_app_on_the_recents_page_on_leidian_player();
+
+    //after failing , find that  the kill current app  on the recents page need a certain speed.whic is not supported in the leidian player 
+    function __on_leidian_player() {
+        // getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function();
+        function __by_touch_file() {
+            let password_string = "/storage/emulated/0/脚本/autoTask_gesture_delete_currentApp";
+            let result = shell("touch " + password_string, false);
+            log(result);
+            // console.show();
+
+            if (result.code == 0) {
+                toast("执行成功");
+            } else {
+                toast("执行失败！请到控制台查看错误信息");
+            }
+
+
+
+        }
+
+
+        function __by_builtinApi_create_file(file_path) {
+            let password_string = "/storage/emulated/0/脚本/autoTask_gesture_delete_currentApp";
+            file_path = file_path || password_string;
+            ensure_file_content(file_path, "");
+        }
+
+        function __by_builtinApi_swipe(x_start, y_start, x_end, y_end, duration) {
+            duration = duration || 2000;
+            let x_start = 500;
+            let y_start = 2000;
+            // y_start = 1800;
+            let x_end = x_start - 400;
+            // y_end = 1800;
+            let y_end = y_start;
+            swipe(x_start, y_start, x_end, y_end, duration);
+
+        }
+        //  __by_touch_file ();
+        __by_builtinApi_create_file("/storage/emulated/0/脚本/autoTask_gesture_delete_currentApp");
+
+
+
+
+    }
+
+    function __on_sp1228() {
+        x_start = 871;
+        y_start = 617;
+        // y_start = 1800;
+        x_end = x_start;
+        // y_end = 1800;
+        y_end = y_start - 400;
+        swipe(x_start, y_start, x_end, y_end, 100);
+
+    }
+    __on_sp1228();
 }
 function kill_current_app(params) {
+
 
     function kill_current_app_by_shell(params) {
     }
@@ -87,50 +155,6 @@ function ensure_file_content(file_path, text, encoding) {
     return files.write(file_path, text, encoding)
 }
 
-//after failing , find that  the kill current app  on the recents page need a certain speed.whic is not supported in the leidian player 
-function gesture_kill_current_app_on_the_recents_page_on_leidian_player() {
-    // getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function();
-    function __by_touch_file() {
-        var password_string = "/storage/emulated/0/脚本/autoTask_gesture_delete_currentApp";
-        var result = shell("touch " + password_string, false);
-        log(result);
-        // console.show();
-
-        if (result.code == 0) {
-            toast("执行成功");
-        } else {
-            toast("执行失败！请到控制台查看错误信息");
-        }
-
-
-
-    }
-
-
-    function __by_builtinApi_create_file(file_path) {
-        var password_string = "/storage/emulated/0/脚本/autoTask_gesture_delete_currentApp";
-        file_path = file_path || password_string;
-        ensure_file_content(file_path, "");
-    }
-
-    function __by_builtinApi_swipe(x_start, y_start, x_end, y_end, duration) {
-        duration = duration || 2000;
-        var x_start = 500;
-        var y_start = 2000;
-        // y_start = 1800;
-        var x_end = x_start - 400;
-        // y_end = 1800;
-        var y_end = y_start;
-        swipe(x_start, y_start, x_end, y_end, duration);
-
-    }
-    //  __by_touch_file ();
-    __by_builtinApi_create_file("/storage/emulated/0/脚本/autoTask_gesture_delete_currentApp");
-
-
-
-
-}
 
 function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
     x_start = 500;
@@ -142,9 +166,15 @@ function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_
     swipe(x_start, y_start, x_end, y_end, 2000);
 }
 
+function infomation_dev(info) {
+    info = info || "dddddddddddddd";
+    toast(info)
+}
+
 function launch_new_app(PackageName) {
     launch_app_start_on_the_home(PackageName);
     sleep_certian_time();
+    infomation_dev();
     Back()
     sleep_certian_time();
     kill_current_app();
@@ -155,7 +185,7 @@ function launch_new_app(PackageName) {
 
 function main(params) {
     auto();
-    var some_prompt_text = "hello world";
+    let some_prompt_text = "hello world";
     toast(some_prompt_text);
     launch_new_app("io.github.huskydg.magisk")
     //  gesture_kill_current_app_on_the_recents_page_on_leidian_player();
@@ -164,28 +194,161 @@ function main(params) {
 }
 
 
+function get_environment_info() {
+    function get_screen_info() {
 
+    }
+
+}
 
 
 function project_kyub() {
 
+    function test() {
+        loop_video_20_minute();
+    }
+
     function enter_kyub_main_page() {
+        launch_new_app("com.kuaishou.nebula");
     }
 
     function enter_kyub_vrqm_page() {
+        enter_kyub_main_page();
+        sleep_certian_time(1000 * 10);
+        gesture__click_the_quvrqm_posision();
+
+        //this gesture function has a template
+        function gesture__click_the_quvrqm_posision() {
+            // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
+            // let start_coords = [800, 1800];
+
+            // let coordinate = [x_start, y_start];
+            // click( ...coordinate);
+            const sp1228 = ihrglobal.miykstring.sp1228;
+            const leidian = ihrglobal.miykstring.leidian;
+
+            function __on_sp1228() {
+                let x_start = 830;
+                let y_start = 1800;
+                click(x_start, y_start);
+            }
+
+            function __on_leidian() {
+                let x_start = 830;
+                let y_start = 1800;
+                click(x_start, y_start);
+            }
+            // here need  optimize
+
+            let functionMap = {
+                sp1228: __on_sp1228,
+                leidian: __on_leidian,
+            };
+
+
+            if (functionMap[ihrglobal.miykstring.currentDevice]) {
+                functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+            } else {
+                console.log("Function not found");
+            }
+
+
+        }
     }
 
     function loop_video_20_minute() {
+
+    function gesture__next_video() {
+        // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
+        // let start_coords = [800, 1800];
+
+        // let coordinate = [x_start, y_start];
+        // click( ...coordinate);
+        const sp1228 = ihrglobal.miykstring.sp1228;
+        const leidian = ihrglobal.miykstring.leidian;
+
+
+        // here need  optimize
+
+        let functionMap = {
+            sp1228: function () {
+                x_start = 871;
+                y_start = 617;
+                // y_start = 1800;
+                x_end = x_start;
+                // y_end = 1800;
+                y_end = y_start - 600;
+                swipe(x_start, y_start, x_end, y_end, 100);
+            },
+
+
+
+            leidian: function () {
+                let x_start = 830;
+                let y_start = 1800;
+                click(x_start, y_start);
+
+            },
+        };
+
+
+        if (functionMap[ihrglobal.miykstring.currentDevice]) {
+            functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+        } else {
+            console.log("Function not found");
+        }
+
+
+    }
+        enter_kyub_main_page();
+        sleep_certian_time(1000 * 6);
+        gesture__next_video();
+
+
     }
 
     function Collect_the_treasure_chest() {
 
-        function click_treasure_chest_posision() {
-            todo();
+        function gesture__click_the_treasure_chest_posision() {
+            // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
+            // let start_coords = [800, 1800];
+
+            // let coordinate = [x_start, y_start];
+            // click( ...coordinate);
+            const sp1228 = ihrglobal.miykstring.sp1228;
+            const leidian = ihrglobal.miykstring.leidian;
+
+
+            // here need  optimize
+
+            let functionMap = {
+                sp1228: function () {
+                    let x_start = 1040;
+                    let y_start = 1600;
+                    click(x_start, y_start);
+                },
+                leidian: function () {
+                    let x_start = 830;
+                    let y_start = 1800;
+                    click(x_start, y_start);
+
+                }
+                ,
+            };
+
+
+            if (functionMap[ihrglobal.miykstring.currentDevice]) {
+                functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+            } else {
+                console.log("Function not found");
+            }
+
+
         }
 
         enter_kyub_vrqm_page();
-        sleep_certian_time();
+        sleep_certian_time(1000 * 10);
+        gesture__click_the_treasure_chest_posision();
 
     }
 
@@ -213,18 +376,20 @@ function project_kyub() {
 
     }
 
+    test();
+    // main();
 
 
 
 }
 function todo() {
 
-    function __by_processExit(){
+    function __by_processExit() {
         console.log("todo");
         process.exit(1); // This will stop the program immediately
     }
 
-    function __by_throw(){
+    function __by_throw() {
         console.log("todo");
         throw new Error("todo");
     }
@@ -235,11 +400,16 @@ function todo() {
 }
 
 
-function test(){
-
-    toast("hello world");
+function test() {
+    auto();
+    let some_text = "hello world";
+    toast(some_text);
+    project_kyub();
+    // kill_current_app();
 
 }
 
 
-test();
+// test();
+
+

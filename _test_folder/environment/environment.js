@@ -6,7 +6,4 @@ var y_dpi = 408
 var sleep_time_default = 1000 *2 
 
 
-function gestures(){
 
-
-}
