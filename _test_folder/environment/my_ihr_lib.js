@@ -10,6 +10,11 @@ function sleep_certian_time(time_long) {
 
 // NOTE  this version can not directly set a value  in a non-exist key in a object
 var ihrglobal = {};
+var  all_gesture= {};
+
+
+
+
 ihrglobal.miykstring = {};
 ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 10;
 ihrglobal.miykstring.sp1228 = "sp1228"
@@ -24,6 +29,24 @@ function stay_home_page_with_unlock() {
     }
 }
 
+function logCurrentDetails() {
+    const error = new Error();
+    const stackLines = error.stack.split('\n');
+    const callerLine = stackLines[2]; // 通常第三行是调用者行
+
+    const functionNameMatch = callerLine.match(/at (\S+)/);
+    const functionName = functionNameMatch ? functionNameMatch[1] : 'anonymous';
+
+    const fileNameMatch = callerLine.match(/\((.*):(\d+):(\d+)\)/);
+    const fileName = fileNameMatch ? fileNameMatch[1] : 'unknown';
+    const lineNumber = fileNameMatch ? fileNameMatch[2] : 'unknown';
+    const columnNumber = fileNameMatch ? fileNameMatch[3] : 'unknown';
+
+    const output = `File: ${fileName}, Function: ${functionName}, Line: ${lineNumber}, Column: ${columnNumber}`;
+
+    console.log(output);
+    return output;
+}
 
 
 function launch_app_start_on_the_home(packageName) {
@@ -103,6 +126,7 @@ function gesture_kill_current_app_on_the_recents_page() {
     }
     __on_sp1228();
 }
+
 function kill_current_app(params) {
 
 
@@ -113,11 +137,14 @@ function kill_current_app(params) {
     }
     function kill_current_app_by_gesture(params) {
     }
+
+
+    infomation_dev("kill_current_app");
     stay_home_page_with_unlock();
     page_recent_app();
     sleep_certian_time();
     gesture_kill_current_app_on_the_recents_page_on_the_vivoS10();
-    gesture_kill_current_app_on_the_recents_page();
+    // gesture_kill_current_app_on_the_recents_page();
 }
 
 
@@ -174,8 +201,8 @@ function infomation_dev(info) {
 function launch_new_app(PackageName) {
     launch_app_start_on_the_home(PackageName);
     sleep_certian_time();
-    infomation_dev();
-    Back()
+    infomation_dev("back button");
+    back()
     sleep_certian_time();
     kill_current_app();
     sleep_certian_time();
@@ -205,7 +232,13 @@ function get_environment_info() {
 function project_kyub() {
 
     function test() {
-        loop_video_20_minute();
+
+        for (let index = 0; index < 20; index++) {
+            sleep_certian_time();
+            Collect_the_treasure_chest();
+            sleep_certian_time();
+            loop_video_20_minute();
+        }
     }
 
     function enter_kyub_main_page() {
@@ -255,58 +288,16 @@ function project_kyub() {
 
         }
     }
+    function main() {
 
-    function loop_video_20_minute() {
-
-    function gesture__next_video() {
-        // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
-        // let start_coords = [800, 1800];
-
-        // let coordinate = [x_start, y_start];
-        // click( ...coordinate);
-        const sp1228 = ihrglobal.miykstring.sp1228;
-        const leidian = ihrglobal.miykstring.leidian;
-
-
-        // here need  optimize
-
-        let functionMap = {
-            sp1228: function () {
-                x_start = 871;
-                y_start = 617;
-                // y_start = 1800;
-                x_end = x_start;
-                // y_end = 1800;
-                y_end = y_start - 600;
-                swipe(x_start, y_start, x_end, y_end, 100);
-            },
-
-
-
-            leidian: function () {
-                let x_start = 830;
-                let y_start = 1800;
-                click(x_start, y_start);
-
-            },
-        };
-
-
-        if (functionMap[ihrglobal.miykstring.currentDevice]) {
-            functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-        } else {
-            console.log("Function not found");
+        check_in();
+        for (let index = 0; index < 20; index++) {
+            sleep_certian_time();
+            Collect_the_treasure_chest();
+            sleep_certian_time();
+            loop_video_20_minute();
         }
-
-
     }
-        enter_kyub_main_page();
-        sleep_certian_time(1000 * 6);
-        gesture__next_video();
-
-
-    }
-
     function Collect_the_treasure_chest() {
 
         function gesture__click_the_treasure_chest_posision() {
@@ -352,33 +343,82 @@ function project_kyub() {
 
     }
 
-    function main() {
+    function loop_video_20_minute() {
 
-        check_in();
-        for (let index = 0; index < 20; index++) {
-            sleep_certian_time();
-            loop_video_20_minute();
-            sleep_certian_time();
-            Collect_the_treasure_chest();
+        function gesture__next_video() {
+            // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
+            // let start_coords = [800, 1800];
+
+            // let coordinate = [x_start, y_start];
+            // click( ...coordinate);
+            const sp1228 = ihrglobal.miykstring.sp1228;
+            const leidian = ihrglobal.miykstring.leidian;
+
+
+            // here need  optimize
+
+            let functionMap = {
+                sp1228: function () {
+                    x_start = 871;
+                    y_start = 617;
+                    // y_start = 1800;
+                    x_end = x_start;
+                    // y_end = 1800;
+                    y_end = y_start - 600;
+                    swipe(x_start, y_start, x_end, y_end, 100);
+                },
+
+
+
+                leidian: function () {
+                    let x_start = 830;
+                    let y_start = 1800;
+                    click(x_start, y_start);
+
+                },
+            };
+
+
+            if (functionMap[ihrglobal.miykstring.currentDevice]) {
+                functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+            } else {
+                console.log("Function not found");
+            }
+
+
         }
+        enter_kyub_main_page();
+        sleep_certian_time(1000 * 6);
+        let currentTime = Date.now();
+
+        while (Date.now() - currentTime < 1000 * 60 * 20) {
+            gesture__next_video();
+            sleep_certian_time(1000 * 6);
+
+        }
+
+
+
+        function check_in() {
+
+            function click_check_in_posision() {
+                todo();
+            }
+
+
+            enter_kyub_vrqm_page();
+            sleep_certian_time(1000 * 10);
+            click_check_in_posision();
+
+        }
+
+
+
+
     }
 
-    function check_in() {
-
-        function click_check_in_posision() {
-            todo();
-        }
-
-
-        enter_kyub_vrqm_page();
-        sleep_certian_time(1000 * 10);
-        click_check_in_posision();
-
-    }
-
-    test();
     // main();
-
+    test();
 
 
 }
@@ -398,18 +438,19 @@ function todo() {
 
 
 }
-
-
 function test() {
-    auto();
+
+    // auto();
     let some_text = "hello world";
     toast(some_text);
     project_kyub();
-    // kill_current_app();
 
 }
 
 
-// test();
+test();
+// back()
+
+
 
 
