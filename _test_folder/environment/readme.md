@@ -20,3 +20,4 @@ how to dynamatically exec  a  code in  a js function to change a local variable
 need a  way to quickly run a function 
 how to dynamatically exec  a  code in  a js function to change a local variable
 
+this autojs's version can not support  "class syntax"
