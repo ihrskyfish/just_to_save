@@ -1,72 +1,109 @@
-// default  is sleep 2 seconds
-// NOTE lower version js engine can not support the default parament syntax
-function sleep_certian_time(time_long) {
-    let true_time_long = time_long || 1000 * 2;
-    sleep(true_time_long);
-}
 
 
 
 
-// NOTE  this version can not directly set a value  in a non-exist key in a object
-var ihrglobal = {};
-var  all_gesture= {};
+// class  gesture {
+//     constructor(x_start, y_start, x_end, y_end, duration ,speed)  {
+//         super();
+//     }
+// }
+
+// class gesture__click_the_treasure_chest_posision_class extends gesture {
+//     constructor() {
+//         super();
+//     }
+//     function() {
+//         let x_start = 1040;
+//         let y_start = 1600;
+//         click(x_start, y_start);
+//     }
+// }
 
 
 
+// ---file: gesture.js @@interface@@ this fs file should define the function named 
+function test2() {
+    // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
+    // let start_coords = [800, 1800];
 
-ihrglobal.miykstring = {};
-ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 10;
-ihrglobal.miykstring.sp1228 = "sp1228"
-ihrglobal.miykstring.leidian = "leidian"
-ihrglobal.miykstring.currentDevice = "sp1228";
+    // let coordinate = [x_start, y_start];
+    // click( ...coordinate);
+    const sp1228 = ihrglobal.miykstring.sp1228;
+    const leidian = ihrglobal.miykstring.leidian;
 
-//BZ
-function stay_home_page_with_unlock() {
-    for (let index = 0; index < 2; index++) {
-        home();
-        sleep_certian_time();
+
+    // here need  optimize
+
+    let functionMap = {
+        sp1228: function () {
+            let x_start = 1040;
+            let y_start = 1600;
+            click(x_start, y_start);
+        },
+        leidian: function () {
+            let x_start = 830;
+            let y_start = 1800;
+            click(x_start, y_start);
+
+        }
+        ,
+    };
+
+
+    if (functionMap[ihrglobal.miykstring.currentDevice]) {
+        functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    } else {
+        console.log("Function not found");
     }
+
+
 }
 
-function logCurrentDetails() {
-    const error = new Error();
-    const stackLines = error.stack.split('\n');
-    const callerLine = stackLines[2]; // 通常第三行是调用者行
-
-    const functionNameMatch = callerLine.match(/at (\S+)/);
-    const functionName = functionNameMatch ? functionNameMatch[1] : 'anonymous';
-
-    const fileNameMatch = callerLine.match(/\((.*):(\d+):(\d+)\)/);
-    const fileName = fileNameMatch ? fileNameMatch[1] : 'unknown';
-    const lineNumber = fileNameMatch ? fileNameMatch[2] : 'unknown';
-    const columnNumber = fileNameMatch ? fileNameMatch[3] : 'unknown';
-
-    const output = `File: ${fileName}, Function: ${functionName}, Line: ${lineNumber}, Column: ${columnNumber}`;
-
-    console.log(output);
-    return output;
+function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
+    x_start = 500;
+    y_start = 2000;
+    // y_start = 1800;
+    x_end = x_start - 400;
+    // y_end = 1800;
+    y_end = y_start;
+    swipe(x_start, y_start, x_end, y_end, 2000);
 }
+function gesture__click_the_quvrqm_posision() {
+    // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
+    // let start_coords = [800, 1800];
 
+    // let coordinate = [x_start, y_start];
+    // click( ...coordinate);
+    const sp1228 = ihrglobal.miykstring.sp1228;
+    const leidian = ihrglobal.miykstring.leidian;
 
-function launch_app_start_on_the_home(packageName) {
-
-    function __by_builtinApi(packageName) {
-        launch(packageName);
-    }
-    function __by_gesture(packageName) {
+    function __on_sp1228() {
+        let x_start = 830;
+        let y_start = 1800;
+        click(x_start, y_start);
     }
 
-    stay_home_page_with_unlock();
-    sleep_certian_time();
-    launch(packageName);
+    function __on_leidian() {
+        let x_start = 830;
+        let y_start = 1800;
+        click(x_start, y_start);
+    }
+    // here need  optimize
+
+    let functionMap = {
+        sp1228: __on_sp1228,
+        leidian: __on_leidian,
+    };
+
+
+    if (functionMap[ihrglobal.miykstring.currentDevice]) {
+        functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    } else {
+        console.log("Function not found");
+    }
+
+
 }
-
-
-function page_recent_app(params) {
-    recents();
-}
-
 function gesture_kill_current_app_on_the_recents_page() {
 
     //after failing , find that  the kill current app  on the recents page need a certain speed.whic is not supported in the leidian player 
@@ -121,13 +158,140 @@ function gesture_kill_current_app_on_the_recents_page() {
         x_end = x_start;
         // y_end = 1800;
         y_end = y_start - 400;
+        swipe(x_start, y_start, x_end, y_end, 200);
+
+    }
+    function on_vivoS10() {
+        x_start = 871;
+        y_start = 617;
+        // y_start = 1800;
+        x_end = x_start;
+        // y_end = 1800;
+        y_end = y_start - 400;
         swipe(x_start, y_start, x_end, y_end, 100);
+
 
     }
     __on_sp1228();
 }
 
-function kill_current_app(params) {
+
+
+function gesture__next_video() {
+    // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
+    // let start_coords = [800, 1800];
+
+    // let coordinate = [x_start, y_start];
+    // click( ...coordinate);
+    const sp1228 = ihrglobal.miykstring.sp1228;
+    const leidian = ihrglobal.miykstring.leidian;
+
+
+    // here need  optimize
+
+    let functionMap = {
+        sp1228: function () {
+            x_start = 871;
+            y_start = 617;
+            // y_start = 1800;
+            x_end = x_start;
+            // y_end = 1800;
+            y_end = y_start - 600;
+            swipe(x_start, y_start, x_end, y_end, 100);
+        },
+
+
+
+        leidian: function () {
+            let x_start = 830;
+            let y_start = 1800;
+            click(x_start, y_start);
+
+        },
+    };
+
+
+    if (functionMap[ihrglobal.miykstring.currentDevice]) {
+        functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    } else {
+        console.log("Function not found");
+    }
+
+
+}
+
+function gesture__click_check_in_posision() {
+    todo();
+}
+
+//---file: my_ihr_lib.js
+
+// default  is sleep 2 seconds
+// NOTE lower version js engine can not support the default parament syntax
+function sleep_certian_time(time_long) {
+    let true_time_long = time_long || 1000 * 2;
+    sleep(true_time_long);
+}
+
+
+// NOTE  this version can not directly set a value  in a non-exist key in a object
+var ihrglobal = {};
+var all_gesture = {};
+// 导入自定义模块
+// const myModule = require('./myModule');
+ihrglobal.miykstring = {};
+ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 10;
+ihrglobal.miykstring.sp1228 = "sp1228"
+ihrglobal.miykstring.leidian = "leidian"
+ihrglobal.miykstring.currentDevice = "sp1228";
+//BZ
+function stay_home_page_with_unlock() {
+    for (let index = 0; index < 2; index++) {
+        home();
+        sleep_certian_time();
+    }
+}
+
+function logCurrentDetails() {
+    const error = new Error();
+    const stackLines = error.stack.split('\n');
+    const callerLine = stackLines[2]; // 通常第三行是调用者行
+
+    const functionNameMatch = callerLine.match(/at (\S+)/);
+    const functionName = functionNameMatch ? functionNameMatch[1] : 'anonymous';
+
+    const fileNameMatch = callerLine.match(/\((.*):(\d+):(\d+)\)/);
+    const fileName = fileNameMatch ? fileNameMatch[1] : 'unknown';
+    const lineNumber = fileNameMatch ? fileNameMatch[2] : 'unknown';
+    const columnNumber = fileNameMatch ? fileNameMatch[3] : 'unknown';
+
+    const output = `File: ${fileName}, Function: ${functionName}, Line: ${lineNumber}, Column: ${columnNumber}`;
+
+    console.log(output);
+    return output;
+}
+
+
+function launch_app_start_on_the_home(packageName) {
+
+    function __by_builtinApi(packageName) {
+        launch(packageName);
+    }
+    function __by_gesture(packageName) {
+    }
+
+    stay_home_page_with_unlock();
+    sleep_certian_time();
+    launch(packageName);
+}
+
+
+function page_recent_app(params) {
+    recents();
+}
+
+
+function kill_current_app() {
 
 
     function kill_current_app_by_shell(params) {
@@ -141,26 +305,16 @@ function kill_current_app(params) {
 
     infomation_dev("kill_current_app");
     stay_home_page_with_unlock();
+    sleep_certian_time();
     page_recent_app();
     sleep_certian_time();
-    gesture_kill_current_app_on_the_recents_page_on_the_vivoS10();
+    gesture_kill_current_app_on_the_recents_page();
     // gesture_kill_current_app_on_the_recents_page();
 }
 
 
 
 // the function shoulder  be required from local compouter
-function gesture_kill_current_app_on_the_recents_page_on_the_vivoS10() {
-    x_start = 871;
-    y_start = 617;
-    // y_start = 1800;
-    x_end = x_start;
-    // y_end = 1800;
-    y_end = y_start - 400;
-    swipe(x_start, y_start, x_end, y_end, 100);
-
-
-}
 
 function test_how_long_the_autojs_app_can_stay() {
     let time_long = 0;
@@ -183,15 +337,6 @@ function ensure_file_content(file_path, text, encoding) {
 }
 
 
-function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
-    x_start = 500;
-    y_start = 2000;
-    // y_start = 1800;
-    x_end = x_start - 400;
-    // y_end = 1800;
-    y_end = y_start;
-    swipe(x_start, y_start, x_end, y_end, 2000);
-}
 
 function infomation_dev(info) {
     info = info || "dddddddddddddd";
@@ -251,45 +396,8 @@ function project_kyub() {
         gesture__click_the_quvrqm_posision();
 
         //this gesture function has a template
-        function gesture__click_the_quvrqm_posision() {
-            // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
-            // let start_coords = [800, 1800];
-
-            // let coordinate = [x_start, y_start];
-            // click( ...coordinate);
-            const sp1228 = ihrglobal.miykstring.sp1228;
-            const leidian = ihrglobal.miykstring.leidian;
-
-            function __on_sp1228() {
-                let x_start = 830;
-                let y_start = 1800;
-                click(x_start, y_start);
-            }
-
-            function __on_leidian() {
-                let x_start = 830;
-                let y_start = 1800;
-                click(x_start, y_start);
-            }
-            // here need  optimize
-
-            let functionMap = {
-                sp1228: __on_sp1228,
-                leidian: __on_leidian,
-            };
-
-
-            if (functionMap[ihrglobal.miykstring.currentDevice]) {
-                functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-            } else {
-                console.log("Function not found");
-            }
-
-
-        }
     }
     function main() {
-
         check_in();
         for (let index = 0; index < 20; index++) {
             sleep_certian_time();
@@ -300,93 +408,21 @@ function project_kyub() {
     }
     function Collect_the_treasure_chest() {
 
-        function gesture__click_the_treasure_chest_posision() {
-            // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
-            // let start_coords = [800, 1800];
-
-            // let coordinate = [x_start, y_start];
-            // click( ...coordinate);
-            const sp1228 = ihrglobal.miykstring.sp1228;
-            const leidian = ihrglobal.miykstring.leidian;
-
-
-            // here need  optimize
-
-            let functionMap = {
-                sp1228: function () {
-                    let x_start = 1040;
-                    let y_start = 1600;
-                    click(x_start, y_start);
-                },
-                leidian: function () {
-                    let x_start = 830;
-                    let y_start = 1800;
-                    click(x_start, y_start);
-
-                }
-                ,
-            };
-
-
-            if (functionMap[ihrglobal.miykstring.currentDevice]) {
-                functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-            } else {
-                console.log("Function not found");
-            }
-
-
-        }
 
         enter_kyub_vrqm_page();
         sleep_certian_time(1000 * 10);
-        gesture__click_the_treasure_chest_posision();
+        test2();
+
+    }
+    function check_in() {
+        enter_kyub_vrqm_page();
+        sleep_certian_time(1000 * 10);
+        gesture__click_check_in_posision();
 
     }
 
     function loop_video_20_minute() {
 
-        function gesture__next_video() {
-            // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
-            // let start_coords = [800, 1800];
-
-            // let coordinate = [x_start, y_start];
-            // click( ...coordinate);
-            const sp1228 = ihrglobal.miykstring.sp1228;
-            const leidian = ihrglobal.miykstring.leidian;
-
-
-            // here need  optimize
-
-            let functionMap = {
-                sp1228: function () {
-                    x_start = 871;
-                    y_start = 617;
-                    // y_start = 1800;
-                    x_end = x_start;
-                    // y_end = 1800;
-                    y_end = y_start - 600;
-                    swipe(x_start, y_start, x_end, y_end, 100);
-                },
-
-
-
-                leidian: function () {
-                    let x_start = 830;
-                    let y_start = 1800;
-                    click(x_start, y_start);
-
-                },
-            };
-
-
-            if (functionMap[ihrglobal.miykstring.currentDevice]) {
-                functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-            } else {
-                console.log("Function not found");
-            }
-
-
-        }
         enter_kyub_main_page();
         sleep_certian_time(1000 * 6);
         let currentTime = Date.now();
@@ -399,26 +435,14 @@ function project_kyub() {
 
 
 
-        function check_in() {
-
-            function click_check_in_posision() {
-                todo();
-            }
-
-
-            enter_kyub_vrqm_page();
-            sleep_certian_time(1000 * 10);
-            click_check_in_posision();
-
-        }
 
 
 
 
     }
 
-    // main();
-    test();
+    main();
+    // test();
 
 
 }
@@ -438,6 +462,12 @@ function todo() {
 
 
 }
+
+
+
+
+
+//---file:test
 function test() {
 
     // auto();
@@ -446,10 +476,9 @@ function test() {
     project_kyub();
 
 }
-
-
 test();
-// back()
+// kill_current_app();
+// gesture_kill_current_app_on_the_recents_page();
 
 
 
