@@ -1,7 +1,6 @@
 
 
 
-
 // class  gesture {
 //     constructor(x_start, y_start, x_end, y_end, duration ,speed)  {
 //         super();
@@ -338,7 +337,7 @@ function ensure_file_content(file_path, text, encoding) {
 
 
 
-function infomation_dev_by_toast_on_autojs(info , islog) {
+function infomation_dev_by_toast_on_autojs(info, islog) {
     info = info || "dddddddddddddd";
 
     toast(info)
@@ -374,7 +373,7 @@ function get_environment_info() {
 
 }
 
-
+// need accessibility service ,
 function project_kyub() {
 
     function test() {
@@ -413,6 +412,7 @@ function project_kyub() {
 
 
         enter_kyub_vrqm_page();
+        infomation_dev_by_toast_on_autojs("sleep begin");
         sleep_certian_time(1000 * 20);
         infomation_dev_by_toast_on_autojs("click the treasure chest  position begin");
         gesture__click_treasure_position();
@@ -481,6 +481,8 @@ function test() {
     project_kyub();
 
 }
+
+
 test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
