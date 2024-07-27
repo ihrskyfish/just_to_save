@@ -23,3 +23,4 @@ all_gesture.project_kyubo.gesture__click_the_treasure_chest_posision = function 
     click(x_start, y_start);
 }
 
+

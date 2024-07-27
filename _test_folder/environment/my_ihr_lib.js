@@ -1,6 +1,26 @@
 
+12
+192
+225 
+222
 
 
+// NOTE  this version can not directly set a value  in a non-exist key in a object
+
+var ihrglobal = {};
+var all_gesture = {};
+// 导入自定义模块
+// const myModule = require('./myModule');
+ihrglobal.x_width = 1200;
+ihrglobal.y_high = 1920;
+ihrglobal.x_dpi = 225;
+ihrglobal.y_dpi = 222;
+ihrglobal.screen_size = 10.1;
+ihrglobal.miykstring = {};
+ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
+ihrglobal.miykstring.sp1228 = "sp1228"
+ihrglobal.miykstring.leidian = "leidian"
+ihrglobal.miykstring.currentDevice = "sp1228";
 // class  gesture {
 //     constructor(x_start, y_start, x_end, y_end, duration ,speed)  {
 //         super();
@@ -220,7 +240,24 @@ function gesture__next_video() {
 }
 
 function gesture__click_check_in_posision() {
-    todo();
+
+    function __on_leidian_player() {
+    }
+
+    function __on_sp1228() {
+        x_start = 871;
+        y_start = 617;
+        // y_start = 1800;
+        x_end = x_start;
+        // y_end = 1800;
+        y_end = y_start - 400;
+        click(x_start, y_start);
+
+    }
+    function on_vivoS10() {
+    }
+    __on_sp1228();
+
 }
 
 //---file: my_ihr_lib.js
@@ -228,21 +265,11 @@ function gesture__click_check_in_posision() {
 // default  is sleep 2 seconds
 // NOTE lower version js engine can not support the default parament syntax
 function sleep_certian_time(time_long) {
-    let true_time_long = time_long || 1000 * 2;
+    let true_time_long = time_long || ihrglobal.miykstring.sleep_time_default_this_devices;
     sleep(true_time_long);
 }
 
 
-// NOTE  this version can not directly set a value  in a non-exist key in a object
-var ihrglobal = {};
-var all_gesture = {};
-// 导入自定义模块
-// const myModule = require('./myModule');
-ihrglobal.miykstring = {};
-ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 10;
-ihrglobal.miykstring.sp1228 = "sp1228"
-ihrglobal.miykstring.leidian = "leidian"
-ihrglobal.miykstring.currentDevice = "sp1228";
 //BZ
 function stay_home_page_with_unlock() {
     for (let index = 0; index < 2; index++) {
