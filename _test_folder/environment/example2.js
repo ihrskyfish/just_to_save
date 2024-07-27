@@ -2,10 +2,9 @@
 //---file:example1
 
 // there is no definin global variable  ,only a  global  variable which can be changed
-function test2() {
+function dfsfjlksjfs() {
     var globalVariable = "I am a global variable";
 }
-test2();
 
 console.log(globalVariable); // I am a global variable
 

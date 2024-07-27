@@ -22,7 +22,7 @@
 
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
-function test2() {
+function gesture__click_treasure_position() {
     // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
     // let start_coords = [800, 1800];
 
@@ -303,7 +303,7 @@ function kill_current_app() {
     }
 
 
-    infomation_dev("kill_current_app");
+    infomation_dev_by_toast_on_autojs("kill_current_app");
     stay_home_page_with_unlock();
     sleep_certian_time();
     page_recent_app();
@@ -338,15 +338,16 @@ function ensure_file_content(file_path, text, encoding) {
 
 
 
-function infomation_dev(info) {
+function infomation_dev_by_toast_on_autojs(info , islog) {
     info = info || "dddddddddddddd";
+
     toast(info)
 }
 
 function launch_new_app(PackageName) {
     launch_app_start_on_the_home(PackageName);
     sleep_certian_time();
-    infomation_dev("back button");
+    infomation_dev_by_toast_on_autojs("back button");
     back()
     sleep_certian_time();
     kill_current_app();
@@ -381,8 +382,9 @@ function project_kyub() {
         for (let index = 0; index < 20; index++) {
             sleep_certian_time();
             Collect_the_treasure_chest();
+            infomation_dev_by_toast_on_autojs("Collect_the_treasure_chest is ok");
             sleep_certian_time();
-            loop_video_20_minute();
+            loop_video_10_minute();
         }
     }
 
@@ -394,6 +396,7 @@ function project_kyub() {
         enter_kyub_main_page();
         sleep_certian_time(1000 * 10);
         gesture__click_the_quvrqm_posision();
+        infomation_dev_by_toast_on_autojs("enter a vrqm page");
 
         //this gesture function has a template
     }
@@ -403,15 +406,17 @@ function project_kyub() {
             sleep_certian_time();
             Collect_the_treasure_chest();
             sleep_certian_time();
-            loop_video_20_minute();
+            loop_video_10_minute();
         }
     }
     function Collect_the_treasure_chest() {
 
 
         enter_kyub_vrqm_page();
-        sleep_certian_time(1000 * 10);
-        test2();
+        sleep_certian_time(1000 * 20);
+        infomation_dev_by_toast_on_autojs("click the treasure chest  position begin");
+        gesture__click_treasure_position();
+        infomation_dev_by_toast_on_autojs("click the treasure chest  position  end");
 
     }
     function check_in() {
@@ -421,13 +426,13 @@ function project_kyub() {
 
     }
 
-    function loop_video_20_minute() {
+    function loop_video_10_minute() {
 
         enter_kyub_main_page();
         sleep_certian_time(1000 * 6);
         let currentTime = Date.now();
 
-        while (Date.now() - currentTime < 1000 * 60 * 20) {
+        while (Date.now() - currentTime < 1000 * 60 * 10) {
             gesture__next_video();
             sleep_certian_time(1000 * 6);
 
@@ -441,8 +446,8 @@ function project_kyub() {
 
     }
 
-    main();
-    // test();
+    // main();
+    test();
 
 
 }
@@ -481,5 +486,4 @@ test();
 // gesture_kill_current_app_on_the_recents_page();
 
 
-
-
+//  gesture__click_treasure_position();
