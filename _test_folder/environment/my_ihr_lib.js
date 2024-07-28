@@ -105,38 +105,39 @@ function gesture__click_treasure_position() {
     // let dict3 = new object();
     // dict3['key1'] = 'value1';
     // dict3.key2 = 'value2';
-    let __classfunctionmap = new map();
-    __classfunctionmap.set(__globalIhrglobal.myPhone.default, function () {
+
+    let __classfunctionmap2 = {};
+    __classfunctionmap2[__globalIhrglobal.myPhone.default] = function () {
         let x_start = device.width * 0.877193;
         let y_start = device.height * 0.891167;
         click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.vivoS10, function () {
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.vivoS10] = function () {
         let x_start = device.width * 0.877193;
         let y_start = device.height * 0.891167;
         click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.xiaomi, function () {
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.xiaomi] = function () {
         let x_start = device.width * 0.877193;
         let y_start = device.height * 0.891167;
         click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.leidian, function () {
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.leidian] = function () {
         let x_start = 830;
         let y_start = 1800;
         click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.sp1228, function () {
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.sp1228] = function () {
         let x_start = 1040;
         let y_start = 1600;
         click(x_start, y_start);
-    });
-
-    if (__classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
-        __classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
-    } else if (__classfunctionmap.get(__globalIhrglobal.myPhone.default)) {
-        __classfunctionmap.get(__globalIhrglobal.myPhone.default)()
-    } else {
+    }
+    if (__classfunctionmap2[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]) {
+        __classfunctionmap2[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]();
+    } else if (__classfunctionmap2[__globalIhrglobal.myPhone.default]) {
+        __classfunctionmap2[__globalIhrglobal.myPhone.default]();
+    }
+    else {
         console.log("function not found");
     }
 }
@@ -151,9 +152,6 @@ function gesture__click_the_quvrqm_posision() {
 }
 
 function gesture_kill_current_app_on_the_recents_page() {
-    function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
-    }
-
     //after failing , find that  the kill current app  on the recents page need a certain speed.whic is not supported in the leidian player 
     function __on_leidian_player() {
         // getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function();
@@ -199,7 +197,38 @@ function gesture_kill_current_app_on_the_recents_page() {
 
     }
 
-    function __on_sp1228() {
+
+
+    let __classfunctionmap = new map();
+    __classfunctionmap.set(__globalIhrglobal.myPhone.default, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.vivoS10, function () {
+        x_start = 871;
+        y_start = 617;
+        // y_start = 1800;
+        x_end = x_start;
+        // y_end = 1800;
+        y_end = y_start - 400;
+        swipe(x_start, y_start, x_end, y_end, 100);
+
+
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.xiaomi, function () {
+        x_start = 262;
+        y_start = 1033;
+        x_end = x_start - 250;
+        y_end = y_start;
+        swipe(x_start, y_start, x_end, y_end, 100);
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.leidian, function () {
+        let x_start = 830;
+        let y_start = 1800;
+        click(x_start, y_start);
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.sp1228, function () {
         x_start = 871;
         y_start = 617;
         // y_start = 1800;
@@ -207,29 +236,15 @@ function gesture_kill_current_app_on_the_recents_page() {
         // y_end = 1800;
         y_end = y_start - 400;
         swipe(x_start, y_start, x_end, y_end, 200);
+    });
 
+    if (__classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
+        __classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
+    } else if (__classfunctionmap.get(__globalIhrglobal.myPhone.default)) {
+        __classfunctionmap.get(__globalIhrglobal.myPhone.default)()
+    } else {
+        console.log("function not found");
     }
-    function on_vivoS10() {
-        x_start = 871;
-        y_start = 617;
-        // y_start = 1800;
-        x_end = x_start;
-        // y_end = 1800;
-        y_end = y_start - 400;
-        swipe(x_start, y_start, x_end, y_end, 100);
-
-
-    }
-
-
-    function xiaoMi_qyip() {
-        x_start = 262;
-        y_start = 1033;
-        x_end = x_start - 250;
-        y_end = y_start;
-        swipe(x_start, y_start, x_end, y_end, 100);
-    }
-    xiaoMi_qyip();
     // __on_sp1228();
 }
 
