@@ -26,10 +26,11 @@ ihrglobal.dev_stage = "test";
 // setScreenMetrics(ihrglobal.x_width, ihrglobal.y_high);
 
 // ths gesture function can be used in xiaomi phone in 快手刷视频
-function gesture__universal_swipe_up() {
+function gesture__universal_swipe_up_in_xCenter() {
     swipe(ihrglobal.x_width / 2, ihrglobal.y_high * 3 / 4, ihrglobal.x_width / 2, ihrglobal.y_high / 4, 100);
-
 }
+
+
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
@@ -40,6 +41,11 @@ function gesture__click_treasure_position() {
     const sp1228 = ihrglobal.miykstring.sp1228;
     const leidian = ihrglobal.miykstring.leidian;
 
+    function __on_xiaomi() {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    }
 
     // here need  optimize
 
@@ -59,11 +65,12 @@ function gesture__click_treasure_position() {
     };
 
 
-    if (functionMap[ihrglobal.miykstring.currentDevice]) {
-        functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-    } else {
-        console.log("Function not found");
-    }
+    __on_xiaomi();
+    // if (functionMap[ihrglobal.miykstring.currentDevice]) {
+    //     functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    // } else {
+    //     console.log("Function not found");
+    // }
 
 
 }
@@ -237,24 +244,39 @@ function gesture__next_video() {
 
 }
 
-function gesture__click_check_in_posision() {
+function gesture__projectKyub__click_check_in_posision() {
 
-    function __on_leidian_player() {
-    }
+    let functionMap__classMyPhoneList = {
+        "sp1228": function () {
+            let x_start = 1040;
+            let y_start = 1600;
+            click(x_start, y_start);
+        },
+        "leidian": function () {
+            let x_start = 830;
+            let y_start = 1800;
+            click(x_start, y_start);
 
-    function __on_sp1228() {
-        x_start = 871;
-        y_start = 617;
-        // y_start = 1800;
-        x_end = x_start;
-        // y_end = 1800;
-        y_end = y_start - 400;
-        click(x_start, y_start);
+        },
+        "xiaomi": function () {
+            let x_start = 830;
+            let y_start = 1800;
+            click(x_start, y_start);
 
+        },
+        "vivoS10": function () {
+            let x_start = 830;
+            let y_start = 1800;
+            click(x_start, y_start);
+
+        },
+    };
+
+    if (functioMap__classMyPhoneList[ihrglobal.miykstring.currentDevice]) {
+        functionMap__classMyPhoneList[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    } else {
+        console.log("Function not found");
     }
-    function on_vivoS10() {
-    }
-    __on_sp1228();
 
 }
 
@@ -500,7 +522,7 @@ function project_kyub() {
     function check_in() {
         enter_kyub_vrqm_page();
         sleep_certian_time(1000 * 10);
-        gesture__click_check_in_posision();
+        gesture__projectKyub__click_check_in_posision();
 
     }
 
@@ -511,7 +533,7 @@ function project_kyub() {
         let currentTime = Date.now();
 
         while (Date.now() - currentTime < 1000 * 60 * 10) {
-            gesture__next_video();
+            gesture__universal_swipe_up_in_xCenter();
             sleep_certian_time(1000 * 6);
 
         }
@@ -556,15 +578,16 @@ function test() {
     // auto();
     let some_text = "hello world";
     toast(some_text);
-    // project_kyub();
+    project_kyub();
 
 }
 
-gesture__universal_swipe_up();
+// gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-// test();
+test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 
 
 //  gesture__click_treasure_position();
+

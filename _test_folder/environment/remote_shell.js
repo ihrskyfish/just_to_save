@@ -10,6 +10,8 @@ setprop service.adb.tcp.port 5555  # need root privilege
 stop adbd
 start adbd
 `;
+
+command = "am "
 let result = shell(command, is_root);
 log(result);
 if (is_show_console_on_devices) {
