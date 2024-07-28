@@ -3,43 +3,109 @@
 
 // NOTE  this version can not directly set a value  in a non-exist key in a object
 
-var ihrglobal = {};
-var all_gesture = {};
+var __globalIhrglobal = {};
+var __globalAll_gesture = {};
 // 导入自定义模块
 // const myModule = require('./myModule');
-ihrglobal.x_width = device.width;
-ihrglobal.y_high = device.height;
-ihrglobal.x_dpi = 225;
-ihrglobal.y_dpi = 222;
-ihrglobal.screen_size = 10.1;
-ihrglobal.miykstring = {};
-ihrglobal.myPhone = {};
-ihrglobal.myPhone.xiaomi = "c804e69518e0c93d"
-ihrglobal.myPhone.vivoS10 = "c804e69518e0c93d"
-ihrglobal.myPhone.sp1228= "c804e69518e0c93d"
-ihrglobal.myPhone.leidian= "c804e69518e0c93d"
+__globalIhrglobal.x_width = device.width;
+__globalIhrglobal.y_high = device.height;
+__globalIhrglobal.x_dpi = 225;
+__globalIhrglobal.y_dpi = 222;
+__globalIhrglobal.screen_size = 10.1;
+__globalIhrglobal.miykstring = {};
+__globalIhrglobal.myPhone = {};
 
-const xiaomi = ihrglobal.myPhone.xiaomi;
-const vivoS10 = ihrglobal.myPhone.vivoS10;
-ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
-ihrglobal.miykstring.__emunKillWay = "gesture";
-ihrglobal.miykstring.__emunKillWay = "manyBacks";
-ihrglobal.miykstring.currentDevices__emunMyPhoneList = device.getAndroidId();
-ihrglobal.miykstring.__emunLanchWay = "launchApi";
-ihrglobal.dev_stage = "test";
+
+// here need  human do it
+__globalIhrglobal.myPhone.xiaomi = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.vivoS10 = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.sp1228 = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.leidian = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.leidian1 = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.leidian2 = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.default = "default"
+
+const __globalXiaomi = __globalIhrglobal.myPhone.xiaomi;
+const __globalVivoS10 = __globalIhrglobal.myPhone.vivoS10;
+const __globalDefaultPhone = __globalIhrglobal.myPhone.default;
+
+__globalIhrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
+__globalIhrglobal.miykstring.__emunKillWay = "gesture";
+__globalIhrglobal.miykstring.__emunKillWay = "manyBacks";
+__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList = device.getAndroidId();
+__globalIhrglobal.miykstring.__emunLanchWay = "launchApi";
+__globalIhrglobal.dev_stage = "test";
 
 // the builtin api has a bug because the android ues ppi to rander
 // setScreenMetrics(ihrglobal.x_width, ihrglobal.y_high);
 
 // ths gesture function can be used in xiaomi phone in 快手刷视频
 function gesture__universal_swipe_up_in_xCenter() {
-    swipe(ihrglobal.x_width / 2, ihrglobal.y_high * 3 / 4, ihrglobal.x_width / 2, ihrglobal.y_high / 4, 100);
+    swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 3 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 4, 100);
 }
 
 
+function __template__gesture__click__position() {
+    // let dict6 = Object.create(null);
+    // dict6.key1 = 'value1';
+    // dict6.key2 = 'value2';
+    // let dict5 = {
+    //     key1: 'value1',
+    //     key2: 'value2'
+    // };
+    // let dict3 = new Object();
+    // dict3['key1'] = 'value1';
+    // dict3.key2 = 'value2';
+    let __classFunctionMap = new Map();
+    __classFunctionMap.set(__globalIhrglobal.myPhone.default, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classFunctionMap.set(__globalIhrglobal.myPhone.vivoS10, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classFunctionMap.set(__globalIhrglobal.myPhone.xiaomi, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classFunctionMap.set(__globalIhrglobal.myPhone.leidian, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classFunctionMap.set(__globalIhrglobal.myPhone.sp1228, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+
+
+    if (__classFunctionMap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
+        __classFunctionMap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
+    } else if (__classFunctionMap.get(__globalDefaultPhone)) {
+        __classFunctionMap.get(__globalDefaultPhone)();
+
+    } else {
+        console.log("Function not found");
+    }
+
+
+
+
+
+
+
+}
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
+
+    const __globalXiaomi = __globalIhrglobal.myPhone.xiaomi;
+
     let __classMyPhoneListFunctionMap = {
         "sp1228": function () {
             let x_start = 1040;
@@ -52,7 +118,7 @@ function gesture__click_treasure_position() {
             click(x_start, y_start);
 
         },
-        xiaomi: function () {
+        __globalXiaomi: function () {
             let x_start = device.width * 0.877193;
             let y_start = device.height * 0.891167;
             click(x_start, y_start);
@@ -63,7 +129,7 @@ function gesture__click_treasure_position() {
             click(x_start, y_start);
 
         },
-        "default": function () {
+        defaultPhone: function () {
             let x_start = device.width * 0.877193;
             let y_start = device.height * 0.891167;
             click(x_start, y_start);
@@ -74,10 +140,10 @@ function gesture__click_treasure_position() {
 
 
 
-    if (__classMyPhoneListFunctionMap[ihrglobal.miykstring.currentDevices__emunMyPhoneList]) {
-        __classMyPhoneListFunctionMap[ihrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
-    } else if (__classMyPhoneListFunctionMap["default"]) {
-        __classMyPhoneListFunctionMap["default"](); // This will execute myFunction1
+    if (__classMyPhoneListFunctionMap[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]) {
+        __classMyPhoneListFunctionMap[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
+    } else if (__classMyPhoneListFunctionMap[__globalDefaultPhone]) {
+        __classMyPhoneListFunctionMap[__globalDefaultPhone](); // This will execute myFunction1
     } else {
         console.log("Function not found");
 
@@ -212,8 +278,8 @@ function gesture__projectKyub__click_check_in_posision() {
         },
     };
 
-    if (functioMap__classMyPhoneList[ihrglobal.miykstring.currentDevices__emunMyPhoneList]) {
-        functionMap__classMyPhoneList[ihrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
+    if (functioMap__classMyPhoneList[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]) {
+        functionMap__classMyPhoneList[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
     } else {
         console.log("Function not found");
     }
@@ -225,7 +291,7 @@ function gesture__projectKyub__click_check_in_posision() {
 // default  is sleep 2 seconds
 // NOTE lower version js engine can not support the default parament syntax
 function sleep_certian_time(time_long) {
-    let true_time_long = time_long || ihrglobal.miykstring.sleep_time_default_this_devices;
+    let true_time_long = time_long || __globalIhrglobal.miykstring.sleep_time_default_this_devices;
     sleep(true_time_long);
 }
 
@@ -336,8 +402,9 @@ echo "已关闭应用: $CURRENT_APP_PACKAGE"
     function kill_current_app_by_backButton_many_times(params) {
     }
     function kill_current_app_by_gesture(params) {
+
     }
-    __emunKillWay = __emunKillWay || ihrglobal.miykstring.__emunKillWay;
+    __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
     infomation_dev_by_toast_on_autojs("kill_current_app");
     if (__emunKillWay == "gesture") {
@@ -385,8 +452,8 @@ function infomation_dev_by_toast_on_autojs(info, islog) {
 }
 
 function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
-    __enumLaunchWay = __enumLaunchWay || ihrglobal.miykstring.__emunLanchWay;
-    __enumKillWay = __enumKillWay || ihrglobal.miykstring.__emunKillWay;
+    __enumLaunchWay = __enumLaunchWay || __globalIhrglobal.miykstring.__emunLanchWay;
+    __enumKillWay = __enumKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
     launch_app_start_on_the_home(PackageName);
     sleep_certian_time();
