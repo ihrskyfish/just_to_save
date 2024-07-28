@@ -14,11 +14,11 @@ ihrglobal.y_dpi = 222;
 ihrglobal.screen_size = 10.1;
 ihrglobal.miykstring = {};
 ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
-ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api = "gesture";
-ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api = "manyBacks";
+ihrglobal.miykstring.__emunKillWay = "gesture";
+ihrglobal.miykstring.__emunKillWay = "manyBacks";
 ihrglobal.miykstring.sp1228 = "sp1228"
 ihrglobal.miykstring.leidian = "leidian"
-ihrglobal.miykstring.currentDevice = "sp1228";
+ihrglobal.miykstring.__emunMyPhoneList = "xiaomi";
 ihrglobal.miykstring.launch_app_by_gesture_or_by_launchApi = "launchApi";
 ihrglobal.dev_stage = "test";
 
@@ -34,21 +34,6 @@ function gesture__universal_swipe_up_in_xCenter() {
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
-    // let start_coords = [800, 1800];
-
-    // let coordinate = [x_start, y_start];
-    // click( ...coordinate);
-    const sp1228 = ihrglobal.miykstring.sp1228;
-    const leidian = ihrglobal.miykstring.leidian;
-
-    function __on_xiaomi() {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
-        click(x_start, y_start);
-    }
-
-    // here need  optimize
-
     let functionMap = {
         sp1228: function () {
             let x_start = 1040;
@@ -64,58 +49,51 @@ function gesture__click_treasure_position() {
         ,
     };
 
+    let functionMap__classMyPhoneList = {
+        "sp1228": function () {
+            let x_start = 1040;
+            let y_start = 1600;
+            click(x_start, y_start);
+        },
+        "leidian": function () {
+            let x_start = 830;
+            let y_start = 1800;
+            click(x_start, y_start);
 
-    __on_xiaomi();
-    // if (functionMap[ihrglobal.miykstring.currentDevice]) {
-    //     functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-    // } else {
-    //     console.log("Function not found");
+        },
+        "xiaomi": function () {
+            let x_start = device.width * 0.877193;
+            let y_start = device.height * 0.891167;
+            click(x_start, y_start);
+        },
+        "vivoS10": function () {
+            let x_start = 830;
+            let y_start = 1800;
+            click(x_start, y_start);
+
+        },
+    };
+
+
+
+    if (functionMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList]) {
+        functionMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList](); // This will execute myFunction1
+    } else {
+        console.log("Function not found");
+    }
+
     // }
 
 
 }
 
 function gesture__click_the_quvrqm_posision() {
-    const sp1228 = ihrglobal.miykstring.sp1228;
-    const leidian = ihrglobal.miykstring.leidian;
 
-    function __on_sp1228() {
-        let x_start = 830;
-        let y_start = 1800;
-        click(x_start, y_start);
-    }
-
-    function __on_leidian() {
-        let x_start = 830;
-        let y_start = 1800;
-        click(x_start, y_start);
-    }
-    // here need  optimize
     function __by_widget() {
         className("androidx.appcompat.app.ActionBar$c").desc("去赚钱").findOne().click()
-
     }
 
-    let functionMap = {
-        sp1228: __on_sp1228,
-        leidian: __on_leidian,
-    };
-
     __by_widget();
-
-
-    // if (functionMap[ihrglobal.miykstring.currentDevice]) {
-    //     functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-    // } else {
-    //     console.log("Function not found");
-    // }
-
-    // let start_coords = [800, 1800];
-
-    // let coordinate = [x_start, y_start];
-    // click( ...coordinate);
-
-
 }
 function gesture_kill_current_app_on_the_recents_page() {
     function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
@@ -235,8 +213,8 @@ function gesture__next_video() {
     };
 
 
-    if (functionMap[ihrglobal.miykstring.currentDevice]) {
-        functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    if (functionMap[ihrglobal.miykstring.__emunMyPhoneList]) {
+        functionMap[ihrglobal.miykstring.__emunMyPhoneList](); // This will execute myFunction1
     } else {
         console.log("Function not found");
     }
@@ -272,8 +250,8 @@ function gesture__projectKyub__click_check_in_posision() {
         },
     };
 
-    if (functioMap__classMyPhoneList[ihrglobal.miykstring.currentDevice]) {
-        functionMap__classMyPhoneList[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    if (functioMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList]) {
+        functionMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList](); // This will execute myFunction1
     } else {
         console.log("Function not found");
     }
@@ -318,7 +296,10 @@ function logCurrentDetails() {
 }
 
 
-function launch_app_start_on_the_home(packageName) {
+function launch_app_start_on_the_home(packageName, __enumLaunchWay) {
+    if (__enumLaunchWay == "gesture") {
+    } else if (__enumLaunchWay == "builtinApi") {
+    }
 
     function __by_builtinApi(packageName) {
         launch(packageName);
@@ -366,9 +347,10 @@ function toast_shell(command, is_root, is_show_console_on_devices) {
     return result;
 }
 
-function kill_current_app() {
+function launch_new_quarck_browser() {
+}
 
-
+function kill_current_app(__emunKillWay) {
 
     function kill_current_app_by_shell(params) {
 
@@ -393,22 +375,20 @@ echo "已关闭应用: $CURRENT_APP_PACKAGE"
     }
     function kill_current_app_by_gesture(params) {
     }
-
-
+    __emunKillWay = __emunKillWay || ihrglobal.miykstring.__emunKillWay;
 
     infomation_dev_by_toast_on_autojs("kill_current_app");
-    if (ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api == "gesture") {
-        stay_home_page_with_unlock();
-        sleep_certian_time();
-        page_recent_app();
-        sleep_certian_time();
-        gesture_kill_current_app_on_the_recents_page();
-    } else if (ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api == "manyBacks") {
+    if (__emunKillWay == "gesture") {
+        kill_current_app_by_gesture();
+    } else if (__emunKillWay == "manyBacks") {
         back_many_times();
-
-    } else if (ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api == "adb") {
-        kill_current_app_by_shell();
     }
+    else if (__emunKillWay == "adb") {
+        kill_current_app_by_shell();
+    } else if (__emunKillWay == "builtinApi") {
+    }
+
+
 }
 
 
@@ -439,19 +419,31 @@ function ensure_file_content(file_path, text, encoding) {
 
 function infomation_dev_by_toast_on_autojs(info, islog) {
     info = info || "dddddddddddddd";
-
     toast(info)
 }
 
-function launch_new_app(PackageName) {
+function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
+    __enumLaunchWay = __enumLaunchWay || ihrglobal.miykstring.launch_app_by_gesture_or_by_launchApi;
+    __enumKillWay = __enumKillWay || ihrglobal.miykstring.__emunKillWay;
+
     launch_app_start_on_the_home(PackageName);
     sleep_certian_time();
     infomation_dev_by_toast_on_autojs("back button");
     back()
     sleep_certian_time();
-    kill_current_app();
+    kill_current_app(__enumKillWay);
     sleep_certian_time();
     launch_app_start_on_the_home(PackageName);
+    // if (__enumLaunchWay == "new") {
+    //     launch_app_start_on_the_home(PackageName);
+    //     sleep_certian_time();
+    //     infomation_dev_by_toast_on_autojs("back button");
+    //     back()
+    //     sleep_certian_time();
+    //     kill_current_app(__enumKillWay);
+    //     sleep_certian_time();
+    //     launch_app_start_on_the_home(PackageName);
+    // }
 }
 
 
@@ -473,19 +465,13 @@ function get_environment_info() {
 
 }
 
+
+function launch_new_app__kyub() {
+
+}
 // need accessibility service ,
 function project_kyub() {
 
-    function test() {
-
-        for (let index = 0; index < 20; index++) {
-            sleep_certian_time();
-            Collect_the_treasure_chest();
-            infomation_dev_by_toast_on_autojs("Collect_the_treasure_chest is ok");
-            sleep_certian_time();
-            loop_video_10_minute();
-        }
-    }
 
     function enter_kyub_main_page() {
         launch_new_app("com.kuaishou.nebula");
@@ -500,7 +486,7 @@ function project_kyub() {
         //this gesture function has a template
     }
     function main() {
-        check_in();
+        // check_in();
         for (let index = 0; index < 20; index++) {
             sleep_certian_time();
             Collect_the_treasure_chest();
@@ -509,8 +495,6 @@ function project_kyub() {
         }
     }
     function Collect_the_treasure_chest() {
-
-
         enter_kyub_vrqm_page();
         infomation_dev_by_toast_on_autojs("sleep begin");
         sleep_certian_time(1000 * 20);
@@ -526,30 +510,19 @@ function project_kyub() {
 
     }
 
-    function loop_video_10_minute() {
-
+    function loop_video_10_minute(minute) {
+        minute = minute || 6;
         enter_kyub_main_page();
         sleep_certian_time(1000 * 6);
+        minutes = 6;
         let currentTime = Date.now();
-
-        while (Date.now() - currentTime < 1000 * 60 * 10) {
+        while (Date.now() - currentTime < 1000 * 60 * minute) {
             gesture__universal_swipe_up_in_xCenter();
             sleep_certian_time(1000 * 6);
 
         }
-
-
-
-
-
-
-
     }
-
-    // main();
-    test();
-
-
+    main();
 }
 function todo() {
 
@@ -569,6 +542,12 @@ function todo() {
 }
 
 
+function __projectQuarck() {
+    function enter_quarck_main_page() {
+        launch_new_app("com.quark.browser");
+    }
+
+}
 
 
 
