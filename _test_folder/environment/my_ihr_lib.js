@@ -18,11 +18,11 @@ __globalIhrglobal.myPhone = {};
 
 // here need  human do it
 __globalIhrglobal.myPhone.xiaomi = "c804e69518e0c93d"
-__globalIhrglobal.myPhone.vivoS10 = "c804e69518e0c93d"
-__globalIhrglobal.myPhone.sp1228 = "c804e69518e0c93d"
-__globalIhrglobal.myPhone.leidian = "c804e69518e0c93d"
-__globalIhrglobal.myPhone.leidian1 = "c804e69518e0c93d"
-__globalIhrglobal.myPhone.leidian2 = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.vivoS10 = "63476539d7ebf0b7"
+__globalIhrglobal.myPhone.sp1228 = "d0b70f6e227bd2bf"
+__globalIhrglobal.myPhone.leidian = "default"
+__globalIhrglobal.myPhone.leidian1 = "default"
+__globalIhrglobal.myPhone.leidian1 = "default"
 __globalIhrglobal.myPhone.default = "default"
 
 const __globalXiaomi = __globalIhrglobal.myPhone.xiaomi;
@@ -30,8 +30,8 @@ const __globalVivoS10 = __globalIhrglobal.myPhone.vivoS10;
 const __globalDefaultPhone = __globalIhrglobal.myPhone.default;
 
 __globalIhrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
-__globalIhrglobal.miykstring.__emunKillWay = "gesture";
 __globalIhrglobal.miykstring.__emunKillWay = "manyBacks";
+__globalIhrglobal.miykstring.__emunKillWay = "gesture";
 __globalIhrglobal.miykstring.currentDevices__emunMyPhoneList = device.getAndroidId();
 __globalIhrglobal.miykstring.__emunLanchWay = "launchApi";
 __globalIhrglobal.dev_stage = "test";
@@ -41,57 +41,10 @@ __globalIhrglobal.dev_stage = "test";
 
 // ths gesture function can be used in xiaomi phone in 快手刷视频
 function gesture__universal_swipe_up_in_xCenter() {
-    swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 3 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 4, 100);
+    swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 2 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 4, 100);
 }
 
 
-function __template__gesture__click__position() {
-    // let dict6 = object.create(null);
-    // dict6.key1 = 'value1';
-    // dict6.key2 = 'value2';
-    // let dict5 = {
-    //     key1: 'value1',
-    //     key2: 'value2'
-    // };
-    // let dict3 = new object();
-    // dict3['key1'] = 'value1';
-    // dict3.key2 = 'value2';
-    let __classfunctionmap = new map();
-    __classfunctionmap.set(__globalIhrglobal.myPhone.default, function () {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
-        click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.vivoS10, function () {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
-        click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.xiaomi, function () {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
-        click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.leidian, function () {
-        let x_start = 830;
-        let y_start = 1800;
-        click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.sp1228, function () {
-        let x_start = 1040;
-        let y_start = 1600;
-        click(x_start, y_start);
-    });
-
-    if (__classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
-        __classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
-    } else if (__classfunctionmap.get(__globalIhrglobal.myPhone.default)) {
-        __classfunctionmap.get(__globalIhrglobal.myPhone.default)()
-    } else {
-        console.log("function not found");
-    }
-
-}
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
@@ -197,15 +150,13 @@ function gesture_kill_current_app_on_the_recents_page() {
 
     }
 
-
-
-    let __classfunctionmap = new map();
-    __classfunctionmap.set(__globalIhrglobal.myPhone.default, function () {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
-        click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.vivoS10, function () {
+    let __classfunctionmap2 = {};
+    __classfunctionmap2[__globalIhrglobal.myPhone.default] = function () {
+        // let x_start = device.width * 0.877193;
+        // let y_start = device.height * 0.891167;
+        // click(x_start, y_start);
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.vivoS10] = function () {
         x_start = 871;
         y_start = 617;
         // y_start = 1800;
@@ -213,39 +164,35 @@ function gesture_kill_current_app_on_the_recents_page() {
         // y_end = 1800;
         y_end = y_start - 400;
         swipe(x_start, y_start, x_end, y_end, 100);
-
-
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.xiaomi, function () {
-        x_start = 262;
-        y_start = 1033;
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.xiaomi] = function () {
+        x_start = 268;
+        y_start = 1633;
         x_end = x_start - 250;
         y_end = y_start;
-        swipe(x_start, y_start, x_end, y_end, 100);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.leidian, function () {
-        let x_start = 830;
-        let y_start = 1800;
-        click(x_start, y_start);
-    });
-    __classfunctionmap.set(__globalIhrglobal.myPhone.sp1228, function () {
-        x_start = 871;
+        swipe(x_start, y_start, x_end, y_end, 1000);
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.leidian] = function () {
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.sp1228] = function () {
+        x_start = 871
         y_start = 617;
         // y_start = 1800;
         x_end = x_start;
         // y_end = 1800;
         y_end = y_start - 400;
         swipe(x_start, y_start, x_end, y_end, 200);
-    });
+    }
 
-    if (__classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
-        __classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
-    } else if (__classfunctionmap.get(__globalIhrglobal.myPhone.default)) {
-        __classfunctionmap.get(__globalIhrglobal.myPhone.default)()
-    } else {
+    if (__classfunctionmap2[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]) {
+        __classfunctionmap2[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]();
+    } else if (__classfunctionmap2[__globalIhrglobal.myPhone.default]) {
+        __classfunctionmap2[__globalIhrglobal.myPhone.default]();
+    }
+    else {
         console.log("function not found");
     }
-    // __on_sp1228();
+
 }
 
 
@@ -405,14 +352,13 @@ echo "已关闭应用: $CURRENT_APP_PACKAGE"
 
     function kill_current_app_by_backButton_many_times(params) {
     }
-    function kill_current_app_by_gesture(params) {
-
-    }
     __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
     infomation_dev_by_toast_on_autojs("kill_current_app");
     if (__emunKillWay == "gesture") {
-        kill_current_app_by_gesture();
+        page_recent_app();
+        sleep_certian_time(1000 * 5);
+        gesture_kill_current_app_on_the_recents_page();
     } else if (__emunKillWay == "manyBacks") {
         back_many_times();
     }
@@ -599,7 +545,7 @@ function test() {
 test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
-
+// device.getAndroidId();
 
 //  gesture__click_treasure_position();
 
