@@ -41,7 +41,7 @@ __globalIhrglobal.dev_stage = "test";
 
 // ths gesture function can be used in xiaomi phone in 快手刷视频
 function gesture__universal_swipe_up_in_xCenter() {
-    swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 2 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 4, 100);
+    swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 3 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 4, 100);
 }
 
 
