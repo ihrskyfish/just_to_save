@@ -13,13 +13,19 @@ ihrglobal.x_dpi = 225;
 ihrglobal.y_dpi = 222;
 ihrglobal.screen_size = 10.1;
 ihrglobal.miykstring = {};
+ihrglobal.myPhone = {};
+ihrglobal.myPhone.xiaomi = "c804e69518e0c93d"
+ihrglobal.myPhone.vivoS10 = "c804e69518e0c93d"
+ihrglobal.myPhone.sp1228= "c804e69518e0c93d"
+ihrglobal.myPhone.leidian= "c804e69518e0c93d"
+
+const xiaomi = ihrglobal.myPhone.xiaomi;
+const vivoS10 = ihrglobal.myPhone.vivoS10;
 ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
 ihrglobal.miykstring.__emunKillWay = "gesture";
 ihrglobal.miykstring.__emunKillWay = "manyBacks";
-ihrglobal.miykstring.sp1228 = "sp1228"
-ihrglobal.miykstring.leidian = "leidian"
-ihrglobal.miykstring.__emunMyPhoneList = "xiaomi";
-ihrglobal.miykstring.launch_app_by_gesture_or_by_launchApi = "launchApi";
+ihrglobal.miykstring.currentDevices__emunMyPhoneList = device.getAndroidId();
+ihrglobal.miykstring.__emunLanchWay = "launchApi";
 ihrglobal.dev_stage = "test";
 
 // the builtin api has a bug because the android ues ppi to rander
@@ -34,22 +40,7 @@ function gesture__universal_swipe_up_in_xCenter() {
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
-    let functionMap = {
-        sp1228: function () {
-            let x_start = 1040;
-            let y_start = 1600;
-            click(x_start, y_start);
-        },
-        leidian: function () {
-            let x_start = 830;
-            let y_start = 1800;
-            click(x_start, y_start);
-
-        }
-        ,
-    };
-
-    let functionMap__classMyPhoneList = {
+    let __classMyPhoneListFunctionMap = {
         "sp1228": function () {
             let x_start = 1040;
             let y_start = 1600;
@@ -61,28 +52,36 @@ function gesture__click_treasure_position() {
             click(x_start, y_start);
 
         },
-        "xiaomi": function () {
+        xiaomi: function () {
             let x_start = device.width * 0.877193;
             let y_start = device.height * 0.891167;
             click(x_start, y_start);
         },
-        "vivoS10": function () {
-            let x_start = 830;
-            let y_start = 1800;
+        vivoS10: function () {
+            let x_start = device.width * 0.877193;
+            let y_start = device.height * 0.891167;
             click(x_start, y_start);
 
         },
+        "default": function () {
+            let x_start = device.width * 0.877193;
+            let y_start = device.height * 0.891167;
+            click(x_start, y_start);
+
+        },
+
     };
 
 
 
-    if (functionMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList]) {
-        functionMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList](); // This will execute myFunction1
+    if (__classMyPhoneListFunctionMap[ihrglobal.miykstring.currentDevices__emunMyPhoneList]) {
+        __classMyPhoneListFunctionMap[ihrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
+    } else if (__classMyPhoneListFunctionMap["default"]) {
+        __classMyPhoneListFunctionMap["default"](); // This will execute myFunction1
     } else {
         console.log("Function not found");
-    }
 
-    // }
+    }
 
 
 }
@@ -95,6 +94,7 @@ function gesture__click_the_quvrqm_posision() {
 
     __by_widget();
 }
+
 function gesture_kill_current_app_on_the_recents_page() {
     function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
     }
@@ -180,46 +180,8 @@ function gesture_kill_current_app_on_the_recents_page() {
 
 
 
-function gesture__next_video() {
-    // let start_coords = [800, 1800];
-
-    // let coordinate = [x_start, y_start];
-    // click( ...coordinate);
-    const sp1228 = ihrglobal.miykstring.sp1228;
-    const leidian = ihrglobal.miykstring.leidian;
-
-
-    // here need  optimize
-
-    let functionMap = {
-        sp1228: function () {
-            x_start = 871;
-            y_start = 617;
-            // y_start = 1800;
-            x_end = x_start;
-            // y_end = 1800;
-            y_end = y_start - 600;
-            swipe(x_start, y_start, x_end, y_end, 100);
-        },
-
-
-
-        leidian: function () {
-            let x_start = 830;
-            let y_start = 1800;
-            click(x_start, y_start);
-
-        },
-    };
-
-
-    if (functionMap[ihrglobal.miykstring.__emunMyPhoneList]) {
-        functionMap[ihrglobal.miykstring.__emunMyPhoneList](); // This will execute myFunction1
-    } else {
-        console.log("Function not found");
-    }
-
-
+function __projectGesture__next_video() {
+    gesture__universal_swipe_up_in_xCenter();
 }
 
 function gesture__projectKyub__click_check_in_posision() {
@@ -236,13 +198,13 @@ function gesture__projectKyub__click_check_in_posision() {
             click(x_start, y_start);
 
         },
-        "xiaomi": function () {
+        xiaomi: function () {
             let x_start = 830;
             let y_start = 1800;
             click(x_start, y_start);
 
         },
-        "vivoS10": function () {
+        vivoS10: function () {
             let x_start = 830;
             let y_start = 1800;
             click(x_start, y_start);
@@ -250,8 +212,8 @@ function gesture__projectKyub__click_check_in_posision() {
         },
     };
 
-    if (functioMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList]) {
-        functionMap__classMyPhoneList[ihrglobal.miykstring.__emunMyPhoneList](); // This will execute myFunction1
+    if (functioMap__classMyPhoneList[ihrglobal.miykstring.currentDevices__emunMyPhoneList]) {
+        functionMap__classMyPhoneList[ihrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
     } else {
         console.log("Function not found");
     }
@@ -423,7 +385,7 @@ function infomation_dev_by_toast_on_autojs(info, islog) {
 }
 
 function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
-    __enumLaunchWay = __enumLaunchWay || ihrglobal.miykstring.launch_app_by_gesture_or_by_launchApi;
+    __enumLaunchWay = __enumLaunchWay || ihrglobal.miykstring.__emunLanchWay;
     __enumKillWay = __enumKillWay || ihrglobal.miykstring.__emunKillWay;
 
     launch_app_start_on_the_home(PackageName);

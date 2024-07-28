@@ -4,4 +4,4 @@ toast('dddd')
 
 
 // back()
-console.log(device.getAndroidId())
+console.log(device, device.getAndroidId())
