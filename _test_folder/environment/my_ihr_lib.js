@@ -1,8 +1,4 @@
 
-12
-192
-225 
-222
 
 
 // NOTE  this version can not directly set a value  in a non-exist key in a object
@@ -18,31 +14,19 @@ ihrglobal.y_dpi = 222;
 ihrglobal.screen_size = 10.1;
 ihrglobal.miykstring = {};
 ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
+ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api = "gesture";
 ihrglobal.miykstring.sp1228 = "sp1228"
 ihrglobal.miykstring.leidian = "leidian"
 ihrglobal.miykstring.currentDevice = "sp1228";
-// class  gesture {
-//     constructor(x_start, y_start, x_end, y_end, duration ,speed)  {
-//         super();
-//     }
-// }
+ihrglobal.miykstring.launch_app_by_gesture_or_by_launchApi = "launchApi";
 
-// class gesture__click_the_treasure_chest_posision_class extends gesture {
-//     constructor() {
-//         super();
-//     }
-//     function() {
-//         let x_start = 1040;
-//         let y_start = 1600;
-//         click(x_start, y_start);
-//     }
-// }
+// the builtin api has a bug because the android ues ppi to rander
+setScreenMetrics(ihrglobal.x_width, ihrglobal.y_high);
 
 
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
-    // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
     // let start_coords = [800, 1800];
 
     // let coordinate = [x_start, y_start];
@@ -79,20 +63,8 @@ function gesture__click_treasure_position() {
 }
 
 function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
-    x_start = 500;
-    y_start = 2000;
-    // y_start = 1800;
-    x_end = x_start - 400;
-    // y_end = 1800;
-    y_end = y_start;
-    swipe(x_start, y_start, x_end, y_end, 2000);
 }
 function gesture__click_the_quvrqm_posision() {
-    // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
-    // let start_coords = [800, 1800];
-
-    // let coordinate = [x_start, y_start];
-    // click( ...coordinate);
     const sp1228 = ihrglobal.miykstring.sp1228;
     const leidian = ihrglobal.miykstring.leidian;
 
@@ -108,18 +80,29 @@ function gesture__click_the_quvrqm_posision() {
         click(x_start, y_start);
     }
     // here need  optimize
+    function __by_widget() {
+        className("androidx.appcompat.app.ActionBar$c").desc("去赚钱").findOne().click()
+
+    }
 
     let functionMap = {
         sp1228: __on_sp1228,
         leidian: __on_leidian,
     };
 
+    __by_widget();
 
-    if (functionMap[ihrglobal.miykstring.currentDevice]) {
-        functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
-    } else {
-        console.log("Function not found");
-    }
+
+    // if (functionMap[ihrglobal.miykstring.currentDevice]) {
+    //     functionMap[ihrglobal.miykstring.currentDevice](); // This will execute myFunction1
+    // } else {
+    //     console.log("Function not found");
+    // }
+
+    // let start_coords = [800, 1800];
+
+    // let coordinate = [x_start, y_start];
+    // click( ...coordinate);
 
 
 }
@@ -191,13 +174,22 @@ function gesture_kill_current_app_on_the_recents_page() {
 
 
     }
-    __on_sp1228();
+
+
+  function  xiaoMi_qyip() {
+        x_start = 262;
+        y_start =1033;
+        x_end = x_start-250;
+        y_end = y_start;
+        swipe(x_start, y_start, x_end, y_end, 500);
+    }
+    // __on_sp1228();
+    xiaoMi_qyip();
 }
 
 
 
 function gesture__next_video() {
-    // id("text1").className("android.widget.CheckedTextView").text("去赚钱").findOne().click();
     // let start_coords = [800, 1800];
 
     // let coordinate = [x_start, y_start];
@@ -318,6 +310,7 @@ function page_recent_app(params) {
 
 
 function kill_current_app() {
+
 
 
     function kill_current_app_by_shell(params) {
