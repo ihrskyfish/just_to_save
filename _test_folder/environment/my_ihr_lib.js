@@ -46,110 +46,99 @@ function gesture__universal_swipe_up_in_xCenter() {
 
 
 function __template__gesture__click__position() {
-    // let dict6 = Object.create(null);
+    // let dict6 = object.create(null);
     // dict6.key1 = 'value1';
     // dict6.key2 = 'value2';
     // let dict5 = {
     //     key1: 'value1',
     //     key2: 'value2'
     // };
-    // let dict3 = new Object();
+    // let dict3 = new object();
     // dict3['key1'] = 'value1';
     // dict3.key2 = 'value2';
-    let __classFunctionMap = new Map();
-    __classFunctionMap.set(__globalIhrglobal.myPhone.default, function () {
+    let __classfunctionmap = new map();
+    __classfunctionmap.set(__globalIhrglobal.myPhone.default, function () {
         let x_start = device.width * 0.877193;
         let y_start = device.height * 0.891167;
         click(x_start, y_start);
     });
-    __classFunctionMap.set(__globalIhrglobal.myPhone.vivoS10, function () {
+    __classfunctionmap.set(__globalIhrglobal.myPhone.vivoS10, function () {
         let x_start = device.width * 0.877193;
         let y_start = device.height * 0.891167;
         click(x_start, y_start);
     });
-    __classFunctionMap.set(__globalIhrglobal.myPhone.xiaomi, function () {
+    __classfunctionmap.set(__globalIhrglobal.myPhone.xiaomi, function () {
         let x_start = device.width * 0.877193;
         let y_start = device.height * 0.891167;
         click(x_start, y_start);
     });
-    __classFunctionMap.set(__globalIhrglobal.myPhone.leidian, function () {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
+    __classfunctionmap.set(__globalIhrglobal.myPhone.leidian, function () {
+        let x_start = 830;
+        let y_start = 1800;
         click(x_start, y_start);
     });
-    __classFunctionMap.set(__globalIhrglobal.myPhone.sp1228, function () {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
+    __classfunctionmap.set(__globalIhrglobal.myPhone.sp1228, function () {
+        let x_start = 1040;
+        let y_start = 1600;
         click(x_start, y_start);
     });
 
-
-    if (__classFunctionMap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
-        __classFunctionMap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
-    } else if (__classFunctionMap.get(__globalDefaultPhone)) {
-        __classFunctionMap.get(__globalDefaultPhone)();
-
+    if (__classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
+        __classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
+    } else if (__classfunctionmap.get(__globalIhrglobal.myPhone.default)) {
+        __classfunctionmap.get(__globalIhrglobal.myPhone.default)()
     } else {
-        console.log("Function not found");
+        console.log("function not found");
     }
-
-
-
-
-
-
 
 }
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
+    // let dict6 = object.create(null);
+    // dict6.key1 = 'value1';
+    // dict6.key2 = 'value2';
+    // let dict5 = {
+    //     key1: 'value1',
+    //     key2: 'value2'
+    // };
+    // let dict3 = new object();
+    // dict3['key1'] = 'value1';
+    // dict3.key2 = 'value2';
+    let __classfunctionmap = new map();
+    __classfunctionmap.set(__globalIhrglobal.myPhone.default, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.vivoS10, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.xiaomi, function () {
+        let x_start = device.width * 0.877193;
+        let y_start = device.height * 0.891167;
+        click(x_start, y_start);
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.leidian, function () {
+        let x_start = 830;
+        let y_start = 1800;
+        click(x_start, y_start);
+    });
+    __classfunctionmap.set(__globalIhrglobal.myPhone.sp1228, function () {
+        let x_start = 1040;
+        let y_start = 1600;
+        click(x_start, y_start);
+    });
 
-    const __globalXiaomi = __globalIhrglobal.myPhone.xiaomi;
-
-    let __classMyPhoneListFunctionMap = {
-        "sp1228": function () {
-            let x_start = 1040;
-            let y_start = 1600;
-            click(x_start, y_start);
-        },
-        "leidian": function () {
-            let x_start = 830;
-            let y_start = 1800;
-            click(x_start, y_start);
-
-        },
-        __globalXiaomi: function () {
-            let x_start = device.width * 0.877193;
-            let y_start = device.height * 0.891167;
-            click(x_start, y_start);
-        },
-        vivoS10: function () {
-            let x_start = device.width * 0.877193;
-            let y_start = device.height * 0.891167;
-            click(x_start, y_start);
-
-        },
-        defaultPhone: function () {
-            let x_start = device.width * 0.877193;
-            let y_start = device.height * 0.891167;
-            click(x_start, y_start);
-
-        },
-
-    };
-
-
-
-    if (__classMyPhoneListFunctionMap[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]) {
-        __classMyPhoneListFunctionMap[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
-    } else if (__classMyPhoneListFunctionMap[__globalDefaultPhone]) {
-        __classMyPhoneListFunctionMap[__globalDefaultPhone](); // This will execute myFunction1
+    if (__classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)) {
+        __classfunctionmap.get(__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList)();
+    } else if (__classfunctionmap.get(__globalIhrglobal.myPhone.default)) {
+        __classfunctionmap.get(__globalIhrglobal.myPhone.default)()
     } else {
-        console.log("Function not found");
-
+        console.log("function not found");
     }
-
-
 }
 
 function gesture__click_the_quvrqm_posision() {
