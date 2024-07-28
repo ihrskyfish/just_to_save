@@ -7,23 +7,29 @@ var ihrglobal = {};
 var all_gesture = {};
 // 导入自定义模块
 // const myModule = require('./myModule');
-ihrglobal.x_width = 1200;
-ihrglobal.y_high = 1920;
+ihrglobal.x_width = device.width;
+ihrglobal.y_high = device.height;
 ihrglobal.x_dpi = 225;
 ihrglobal.y_dpi = 222;
 ihrglobal.screen_size = 10.1;
 ihrglobal.miykstring = {};
 ihrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
 ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api = "gesture";
+ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api = "manyBacks";
 ihrglobal.miykstring.sp1228 = "sp1228"
 ihrglobal.miykstring.leidian = "leidian"
 ihrglobal.miykstring.currentDevice = "sp1228";
 ihrglobal.miykstring.launch_app_by_gesture_or_by_launchApi = "launchApi";
+ihrglobal.dev_stage = "test";
 
 // the builtin api has a bug because the android ues ppi to rander
-setScreenMetrics(ihrglobal.x_width, ihrglobal.y_high);
+// setScreenMetrics(ihrglobal.x_width, ihrglobal.y_high);
 
+// ths gesture function can be used in xiaomi phone in 快手刷视频
+function gesture__universal_swipe_up() {
+    swipe(ihrglobal.x_width / 2, ihrglobal.y_high * 3 / 4, ihrglobal.x_width / 2, ihrglobal.y_high / 4, 100);
 
+}
 
 // ---file: gesture.js @@interface@@ this fs file should define the function named 
 function gesture__click_treasure_position() {
@@ -62,8 +68,6 @@ function gesture__click_treasure_position() {
 
 }
 
-function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
-}
 function gesture__click_the_quvrqm_posision() {
     const sp1228 = ihrglobal.miykstring.sp1228;
     const leidian = ihrglobal.miykstring.leidian;
@@ -107,6 +111,8 @@ function gesture__click_the_quvrqm_posision() {
 
 }
 function gesture_kill_current_app_on_the_recents_page() {
+    function getsture_kill_current_app_on_the_recents_page_on_leidianPlayer__autojs_function() {
+    }
 
     //after failing , find that  the kill current app  on the recents page need a certain speed.whic is not supported in the leidian player 
     function __on_leidian_player() {
@@ -176,15 +182,15 @@ function gesture_kill_current_app_on_the_recents_page() {
     }
 
 
-  function  xiaoMi_qyip() {
+    function xiaoMi_qyip() {
         x_start = 262;
-        y_start =1033;
-        x_end = x_start-250;
+        y_start = 1033;
+        x_end = x_start - 250;
         y_end = y_start;
-        swipe(x_start, y_start, x_end, y_end, 500);
+        swipe(x_start, y_start, x_end, y_end, 100);
     }
-    // __on_sp1228();
     xiaoMi_qyip();
+    // __on_sp1228();
 }
 
 
@@ -309,11 +315,56 @@ function page_recent_app(params) {
 }
 
 
+
+function back_many_times() {
+
+    for (let index = 0; index < 3; index++) {
+        back();
+        sleep_certian_time();
+    }
+}
+
+
+
+
+function toast_shell(command, is_root, is_show_console_on_devices) {
+    let is_root = is_root || false;
+    let is_show_console_on_devices = is_show_console_on_devices || false;
+    let result = shell(command, is_root);
+    log(result);
+    if (is_show_console_on_devices) {
+        console.show();
+    }
+    if (result.code == 0) {
+        toast("执行成功");
+    } else {
+        toast("执行失败！请到控制台查看错误信息");
+    }
+
+    return result;
+}
+
 function kill_current_app() {
 
 
 
     function kill_current_app_by_shell(params) {
+
+        let command = `
+        #!/bin/bash
+# 获取当前应用的包名
+CURRENT_APP_PACKAGE=$(adb shell dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
+# 检查是否成功获取包名
+if [ -z "$CURRENT_APP_PACKAGE" ]; then
+  echo "无法获取当前应用的包名"
+  exit 1
+fi
+echo "当前应用包名: $CURRENT_APP_PACKAGE"
+# 关闭当前应用
+adb shell am force-stop "$CURRENT_APP_PACKAGE"
+echo "已关闭应用: $CURRENT_APP_PACKAGE"
+        `;
+        toast_shell(command);
     }
 
     function kill_current_app_by_backButton_many_times(params) {
@@ -322,13 +373,20 @@ function kill_current_app() {
     }
 
 
+
     infomation_dev_by_toast_on_autojs("kill_current_app");
-    stay_home_page_with_unlock();
-    sleep_certian_time();
-    page_recent_app();
-    sleep_certian_time();
-    gesture_kill_current_app_on_the_recents_page();
-    // gesture_kill_current_app_on_the_recents_page();
+    if (ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api == "gesture") {
+        stay_home_page_with_unlock();
+        sleep_certian_time();
+        page_recent_app();
+        sleep_certian_time();
+        gesture_kill_current_app_on_the_recents_page();
+    } else if (ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api == "manyBacks") {
+        back_many_times();
+
+    } else if (ihrglobal.miykstring.kill_current_app_varvar_by_gesture_or_by_manyBacks_or_by_api == "adb") {
+        kill_current_app_by_shell();
+    }
 }
 
 
@@ -498,12 +556,13 @@ function test() {
     // auto();
     let some_text = "hello world";
     toast(some_text);
-    project_kyub();
+    // project_kyub();
 
 }
 
-
-test();
+gesture__universal_swipe_up();
+// kill_current_app();
+// test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 
