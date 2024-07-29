@@ -41,7 +41,7 @@ __globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10]["sleep_time"] = 1000
 __globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].x_width = 1080;
 __globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].y_width = 2400;
 __globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].x_dpi = 408;
-__globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].x_dpi = x_dpi;
+// __globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].x_dpi = x_dpi;
 
 const __globalXiaomi = __globalIhrglobal.myPhone.xiaomi;
 const __globalVivoS10 = __globalIhrglobal.myPhone.vivoS10;
@@ -59,7 +59,7 @@ function ihrGetAndroidId() {
     }
 
 
-    console.log("default as default");
+    console.log("normal android id");
     return device.getAndroidId();
 }
 
@@ -393,10 +393,63 @@ function run_shell(__enumPrivilege, command) {
 
 }
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
-function adb_shell(command) {
-    function kill_cuurent_app_by_shell() {
+function project_kyub() {
 
-        let command = `
+
+    function enter_kyub_main_page() {
+        launch_new_app("com.kuaishou.nebula");
+    }
+
+    function enter_kyub_vrqm_page() {
+        enter_kyub_main_page();
+        sleep_certian_time(1000 * 10);
+        gesture__click_the_quvrqm_posision();
+        infomation_dev_by_toast_on_autojs("enter a vrqm page");
+
+        //this gesture function has a template
+    }
+    function main() {
+        // check_in();
+        for (let index = 0; index < 20; index++) {
+            sleep_certian_time();
+            Collect_the_treasure_chest();
+            sleep_certian_time();
+            loop_video_10_minute();
+        }
+    }
+    function Collect_the_treasure_chest() {
+        enter_kyub_vrqm_page();
+        infomation_dev_by_toast_on_autojs("sleep begin");
+        sleep_certian_time(1000 * 20);
+        infomation_dev_by_toast_on_autojs("click the treasure chest  position begin");
+        gesture__click_treasure_position();
+        infomation_dev_by_toast_on_autojs("click the treasure chest  position  end");
+
+    }
+    function check_in() {
+        enter_kyub_vrqm_page();
+        sleep_certian_time(1000 * 10);
+        gesture__projectKyub__click_check_in_posision();
+
+    }
+
+    function loop_video_10_minute(minute) {
+        minute = minute || 6;
+        enter_kyub_main_page();
+        sleep_certian_time(1000 * 6);
+        minutes = 10;
+        let currentTime = Date.now();
+        while (Date.now() - currentTime < 1000 * 60 * minute) {
+            gesture__universal_swipe_up_in_xCenter();
+            sleep_certian_time(1000 * 6);
+
+        }
+    }
+    main();
+}
+function kill_cuurent_app_by_shell() {
+
+    let command = `
 #!/bin/bash
 # 获取当前前台应用的包名
 CURRENT_APP_PACKAGE=$(dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
@@ -418,16 +471,13 @@ echo "已关闭应用: $CURRENT_APP_PACKAGE"
         `;
 
 
-    }
-    function root_shell(command) {
+}
 
-    }
+function kill_current_app(__emunKillWay) {
 
-    function kill_current_app(__emunKillWay) {
+    function kill_cuurent_app_by_shell() {
 
-        function kill_cuurent_app_by_shell() {
-
-            let command = `
+        let command = `
 #!/bin/bash
 # 获取当前应用的包名
 CURRENT_APP_PACKAGE=$(adb shell dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
@@ -441,187 +491,129 @@ echo "当前应用包名: $CURRENT_APP_PACKAGE"
 adb shell am force-stop "$CURRENT_APP_PACKAGE"
 echo "已关闭应用: $CURRENT_APP_PACKAGE"
         `;
-            toast_shell(command);
-        }
-
-        __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
-
-        infomation_dev_by_toast_on_autojs("kill_current_app");
-        if (__emunKillWay == "gesture") {
-            page_recent_app();
-            sleep_certian_time(1000 * 5);
-            gesture_kill_current_app_on_the_recents_page();
-        } else if (__emunKillWay == "manyBacks") {
-            back_many_times();
-        }
-        else if (__emunKillWay == "adb") {
-            kill_cuurent_app_by_shell();
-        } else if (__emunKillWay == "builtinApi") {
-        }
-
-
+        toast_shell(command);
     }
 
+    __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
-
-    // the function shoulder  be required from local compouter
-
-    function test_how_long_the_autojs_app_can_stay() {
-        let time_long = 0;
-        let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
-
-        while (true) {
-            let format_string = "the program ^^ run" + time_long + "minute";
-            toast(format_string);
-            ensure_file_content(file_path, time_long);
-
-        }
+    infomation_dev_by_toast_on_autojs("kill_current_app");
+    if (__emunKillWay == "gesture") {
+        page_recent_app();
+        sleep_certian_time(1000 * 5);
+        gesture_kill_current_app_on_the_recents_page();
+    } else if (__emunKillWay == "manyBacks") {
+        back_many_times();
     }
-
-
-    function ensure_file_content(file_path, text, encoding) {
-
-        encoding = encoding || "utf8";
-        files.ensureDir(file_path);
-        return files.write(file_path, text, encoding)
-    }
-
-
-
-    function infomation_dev_by_toast_on_autojs(info, islog) {
-        info = info || "dddddddddddddd";
-        toast(info)
-    }
-
-    function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
-        __enumLaunchWay = __enumLaunchWay || __globalIhrglobal.miykstring.__emunLanchWay;
-        __enumKillWay = __enumKillWay || __globalIhrglobal.miykstring.__emunKillWay;
-
-        launch_app_start_on_the_home(PackageName);
-        sleep_certian_time();
-        infomation_dev_by_toast_on_autojs("back button");
-        back()
-        sleep_certian_time();
-        kill_current_app(__enumKillWay);
-        sleep_certian_time();
-        launch_app_start_on_the_home(PackageName);
-        // if (__enumLaunchWay == "new") {
-        //     launch_app_start_on_the_home(PackageName);
-        //     sleep_certian_time();
-        //     infomation_dev_by_toast_on_autojs("back button");
-        //     back()
-        //     sleep_certian_time();
-        //     kill_current_app(__enumKillWay);
-        //     sleep_certian_time();
-        //     launch_app_start_on_the_home(PackageName);
-        // }
-    }
-
-
-    function main(params) {
-        auto();
-        let some_prompt_text = "hello world";
-        toast(some_prompt_text);
-        launch_new_app("io.github.huskydg.magisk")
-        //  gesture_kill_current_app_on_the_recents_page_on_leidian_player();
-        let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
-
-    }
-
-
-    function get_environment_info() {
-        function get_screen_info() {
-
-        }
-
-    }
-
-
-    function launch_new_app__kyub() {
-
-    }
-    // need accessibility service ,
-    function project_kyub() {
-
-
-        function enter_kyub_main_page() {
-            launch_new_app("com.kuaishou.nebula");
-        }
-
-        function enter_kyub_vrqm_page() {
-            enter_kyub_main_page();
-            sleep_certian_time(1000 * 10);
-            gesture__click_the_quvrqm_posision();
-            infomation_dev_by_toast_on_autojs("enter a vrqm page");
-
-            //this gesture function has a template
-        }
-        function main() {
-            // check_in();
-            for (let index = 0; index < 20; index++) {
-                sleep_certian_time();
-                Collect_the_treasure_chest();
-                sleep_certian_time();
-                loop_video_10_minute();
-            }
-        }
-        function Collect_the_treasure_chest() {
-            enter_kyub_vrqm_page();
-            infomation_dev_by_toast_on_autojs("sleep begin");
-            sleep_certian_time(1000 * 20);
-            infomation_dev_by_toast_on_autojs("click the treasure chest  position begin");
-            gesture__click_treasure_position();
-            infomation_dev_by_toast_on_autojs("click the treasure chest  position  end");
-
-        }
-        function check_in() {
-            enter_kyub_vrqm_page();
-            sleep_certian_time(1000 * 10);
-            gesture__projectKyub__click_check_in_posision();
-
-        }
-
-        function loop_video_10_minute(minute) {
-            minute = minute || 6;
-            enter_kyub_main_page();
-            sleep_certian_time(1000 * 6);
-            minutes = 10;
-            let currentTime = Date.now();
-            while (Date.now() - currentTime < 1000 * 60 * minute) {
-                gesture__universal_swipe_up_in_xCenter();
-                sleep_certian_time(1000 * 6);
-
-            }
-        }
-        main();
-    }
-    function todo() {
-
-        function __by_processExit() {
-            console.log("todo");
-            process.exit(1); // This will stop the program immediately
-        }
-
-        function __by_throw() {
-            console.log("todo");
-            throw new Error("todo");
-        }
-
-        __by_processExit();
-
-
-    }
-
-
-    function __projectQuarck() {
-        function enter_quarck_main_page() {
-            launch_new_app("com.quark.browser");
-        }
-
+    else if (__emunKillWay == "adb") {
+        kill_cuurent_app_by_shell();
+    } else if (__emunKillWay == "builtinApi") {
     }
 
 
 }
+
+
+
+// the function shoulder  be required from local compouter
+
+function test_how_long_the_autojs_app_can_stay() {
+    let time_long = 0;
+    let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
+
+    while (true) {
+        let format_string = "the program ^^ run" + time_long + "minute";
+        toast(format_string);
+        ensure_file_content(file_path, time_long);
+
+    }
+}
+
+
+function ensure_file_content(file_path, text, encoding) {
+
+    encoding = encoding || "utf8";
+    files.ensureDir(file_path);
+    return files.write(file_path, text, encoding)
+}
+
+
+
+function infomation_dev_by_toast_on_autojs(info, islog) {
+    info = info || "dddddddddddddd";
+    toast(info)
+}
+
+function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
+    __enumLaunchWay = __enumLaunchWay || __globalIhrglobal.miykstring.__emunLanchWay;
+    __enumKillWay = __enumKillWay || __globalIhrglobal.miykstring.__emunKillWay;
+
+    launch_app_start_on_the_home(PackageName);
+    sleep_certian_time();
+    infomation_dev_by_toast_on_autojs("back button");
+    back()
+    sleep_certian_time();
+    kill_current_app(__enumKillWay);
+    sleep_certian_time();
+    launch_app_start_on_the_home(PackageName);
+    // if (__enumLaunchWay == "new") {
+    //     launch_app_start_on_the_home(PackageName);
+    //     sleep_certian_time();
+    //     infomation_dev_by_toast_on_autojs("back button");
+    //     back()
+    //     sleep_certian_time();
+    //     kill_current_app(__enumKillWay);
+    //     sleep_certian_time();
+    //     launch_app_start_on_the_home(PackageName);
+    // }
+}
+
+
+function main(params) {
+    auto();
+    let some_prompt_text = "hello world";
+    toast(some_prompt_text);
+    launch_new_app("io.github.huskydg.magisk")
+    //  gesture_kill_current_app_on_the_recents_page_on_leidian_player();
+    let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
+
+}
+
+
+function get_environment_info() {
+    function get_screen_info() {
+
+    }
+
+}
+
+
+// need accessibility service ,
+function todo() {
+
+    function __by_processExit() {
+        console.log("todo");
+        process.exit(1); // This will stop the program immediately
+    }
+
+    function __by_throw() {
+        console.log("todo");
+        throw new Error("todo");
+    }
+
+    __by_processExit();
+
+
+}
+
+
+function __projectQuarck() {
+    function enter_quarck_main_page() {
+        launch_new_app("com.quark.browser");
+    }
+
+}
+
+
 //---file:test
 function test() {
 
@@ -634,7 +626,7 @@ function test() {
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-// test();
+test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
