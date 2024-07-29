@@ -371,11 +371,63 @@ function toast_shell(command, is_root, is_show_console_on_devices) {
 function launch_new_quarck_browser() {
 }
 
-function kill_current_app(__emunKillWay) {
 
-    function kill_current_app_by_shell(params) {
+
+
+function autojs_builtinapi_shell(command, is_root) {
+    is_root = is_root || false;
+    return shell(command.is_root);
+}
+// BUG  for a command ,need to know its privilege ,and this function can not throw a un_privilege error
+function run_shell(__enumPrivilege, command) {
+    var result;
+    if (__enumPrivilege == "root") {
+        result = autojs_builtinapi_shell(command, true);
+    } else if (__enumPrivilege == "adb") {
+        result = autojs_builtinapi_shell("adb shell" + command, false);
+    } else if (__enumPrivilege == "normal") {
+        result = autojs_builtinapi_shell(command, false);
+    }
+
+    return result;
+
+}
+// the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
+function adb_shell(command) {
+    function kill_cuurent_app_by_shell() {
 
         let command = `
+#!/bin/bash
+# 获取当前前台应用的包名
+CURRENT_APP_PACKAGE=$(dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
+
+# 检查是否成功获取包名
+if [ -z "$CURRENT_APP_PACKAGE" ]; then
+  echo "无法获取当前应用的包名"
+  exit 1
+fi
+
+echo "当前应用包名: $CURRENT_APP_PACKAGE"
+
+# 使用root权限关闭当前应用
+su -c "am force-stop $CURRENT_APP_PACKAGE"
+
+echo "已关闭应用: $CURRENT_APP_PACKAGE"
+        
+        
+        `;
+
+
+    }
+    function root_shell(command) {
+
+    }
+
+    function kill_current_app(__emunKillWay) {
+
+        function kill_cuurent_app_by_shell() {
+
+            let command = `
 #!/bin/bash
 # 获取当前应用的包名
 CURRENT_APP_PACKAGE=$(adb shell dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
@@ -389,187 +441,187 @@ echo "当前应用包名: $CURRENT_APP_PACKAGE"
 adb shell am force-stop "$CURRENT_APP_PACKAGE"
 echo "已关闭应用: $CURRENT_APP_PACKAGE"
         `;
-        toast_shell(command);
-    }
+            toast_shell(command);
+        }
 
-    __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
+        __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
-    infomation_dev_by_toast_on_autojs("kill_current_app");
-    if (__emunKillWay == "gesture") {
-        page_recent_app();
-        sleep_certian_time(1000 * 5);
-        gesture_kill_current_app_on_the_recents_page();
-    } else if (__emunKillWay == "manyBacks") {
-        back_many_times();
-    }
-    else if (__emunKillWay == "adb") {
-        kill_current_app_by_shell();
-    } else if (__emunKillWay == "builtinApi") {
-    }
+        infomation_dev_by_toast_on_autojs("kill_current_app");
+        if (__emunKillWay == "gesture") {
+            page_recent_app();
+            sleep_certian_time(1000 * 5);
+            gesture_kill_current_app_on_the_recents_page();
+        } else if (__emunKillWay == "manyBacks") {
+            back_many_times();
+        }
+        else if (__emunKillWay == "adb") {
+            kill_cuurent_app_by_shell();
+        } else if (__emunKillWay == "builtinApi") {
+        }
 
-
-}
-
-
-
-// the function shoulder  be required from local compouter
-
-function test_how_long_the_autojs_app_can_stay() {
-    let time_long = 0;
-    let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
-
-    while (true) {
-        let format_string = "the program ^^ run" + time_long + "minute";
-        toast(format_string);
-        ensure_file_content(file_path, time_long);
-
-    }
-}
-
-
-function ensure_file_content(file_path, text, encoding) {
-
-    encoding = encoding || "utf8";
-    files.ensureDir(file_path);
-    return files.write(file_path, text, encoding)
-}
-
-
-
-function infomation_dev_by_toast_on_autojs(info, islog) {
-    info = info || "dddddddddddddd";
-    toast(info)
-}
-
-function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
-    __enumLaunchWay = __enumLaunchWay || __globalIhrglobal.miykstring.__emunLanchWay;
-    __enumKillWay = __enumKillWay || __globalIhrglobal.miykstring.__emunKillWay;
-
-    launch_app_start_on_the_home(PackageName);
-    sleep_certian_time();
-    infomation_dev_by_toast_on_autojs("back button");
-    back()
-    sleep_certian_time();
-    kill_current_app(__enumKillWay);
-    sleep_certian_time();
-    launch_app_start_on_the_home(PackageName);
-    // if (__enumLaunchWay == "new") {
-    //     launch_app_start_on_the_home(PackageName);
-    //     sleep_certian_time();
-    //     infomation_dev_by_toast_on_autojs("back button");
-    //     back()
-    //     sleep_certian_time();
-    //     kill_current_app(__enumKillWay);
-    //     sleep_certian_time();
-    //     launch_app_start_on_the_home(PackageName);
-    // }
-}
-
-
-function main(params) {
-    auto();
-    let some_prompt_text = "hello world";
-    toast(some_prompt_text);
-    launch_new_app("io.github.huskydg.magisk")
-    //  gesture_kill_current_app_on_the_recents_page_on_leidian_player();
-    let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
-
-}
-
-
-function get_environment_info() {
-    function get_screen_info() {
 
     }
 
-}
 
 
-function launch_new_app__kyub() {
+    // the function shoulder  be required from local compouter
 
-}
-// need accessibility service ,
-function project_kyub() {
+    function test_how_long_the_autojs_app_can_stay() {
+        let time_long = 0;
+        let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
 
+        while (true) {
+            let format_string = "the program ^^ run" + time_long + "minute";
+            toast(format_string);
+            ensure_file_content(file_path, time_long);
 
-    function enter_kyub_main_page() {
-        launch_new_app("com.kuaishou.nebula");
-    }
-
-    function enter_kyub_vrqm_page() {
-        enter_kyub_main_page();
-        sleep_certian_time(1000 * 10);
-        gesture__click_the_quvrqm_posision();
-        infomation_dev_by_toast_on_autojs("enter a vrqm page");
-
-        //this gesture function has a template
-    }
-    function main() {
-        // check_in();
-        for (let index = 0; index < 20; index++) {
-            sleep_certian_time();
-            Collect_the_treasure_chest();
-            sleep_certian_time();
-            loop_video_10_minute();
         }
     }
-    function Collect_the_treasure_chest() {
-        enter_kyub_vrqm_page();
-        infomation_dev_by_toast_on_autojs("sleep begin");
-        sleep_certian_time(1000 * 20);
-        infomation_dev_by_toast_on_autojs("click the treasure chest  position begin");
-        gesture__click_treasure_position();
-        infomation_dev_by_toast_on_autojs("click the treasure chest  position  end");
 
-    }
-    function check_in() {
-        enter_kyub_vrqm_page();
-        sleep_certian_time(1000 * 10);
-        gesture__projectKyub__click_check_in_posision();
 
+    function ensure_file_content(file_path, text, encoding) {
+
+        encoding = encoding || "utf8";
+        files.ensureDir(file_path);
+        return files.write(file_path, text, encoding)
     }
 
-    function loop_video_10_minute(minute) {
-        minute = minute || 6;
-        enter_kyub_main_page();
-        sleep_certian_time(1000 * 6);
-        minutes = 10;
-        let currentTime = Date.now();
-        while (Date.now() - currentTime < 1000 * 60 * minute) {
-            gesture__universal_swipe_up_in_xCenter();
+
+
+    function infomation_dev_by_toast_on_autojs(info, islog) {
+        info = info || "dddddddddddddd";
+        toast(info)
+    }
+
+    function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
+        __enumLaunchWay = __enumLaunchWay || __globalIhrglobal.miykstring.__emunLanchWay;
+        __enumKillWay = __enumKillWay || __globalIhrglobal.miykstring.__emunKillWay;
+
+        launch_app_start_on_the_home(PackageName);
+        sleep_certian_time();
+        infomation_dev_by_toast_on_autojs("back button");
+        back()
+        sleep_certian_time();
+        kill_current_app(__enumKillWay);
+        sleep_certian_time();
+        launch_app_start_on_the_home(PackageName);
+        // if (__enumLaunchWay == "new") {
+        //     launch_app_start_on_the_home(PackageName);
+        //     sleep_certian_time();
+        //     infomation_dev_by_toast_on_autojs("back button");
+        //     back()
+        //     sleep_certian_time();
+        //     kill_current_app(__enumKillWay);
+        //     sleep_certian_time();
+        //     launch_app_start_on_the_home(PackageName);
+        // }
+    }
+
+
+    function main(params) {
+        auto();
+        let some_prompt_text = "hello world";
+        toast(some_prompt_text);
+        launch_new_app("io.github.huskydg.magisk")
+        //  gesture_kill_current_app_on_the_recents_page_on_leidian_player();
+        let file_path = "/sdcard/used_by_autojs/used_by_TestHowLongTheAutojsAppCanStay.txt";
+
+    }
+
+
+    function get_environment_info() {
+        function get_screen_info() {
+
+        }
+
+    }
+
+
+    function launch_new_app__kyub() {
+
+    }
+    // need accessibility service ,
+    function project_kyub() {
+
+
+        function enter_kyub_main_page() {
+            launch_new_app("com.kuaishou.nebula");
+        }
+
+        function enter_kyub_vrqm_page() {
+            enter_kyub_main_page();
+            sleep_certian_time(1000 * 10);
+            gesture__click_the_quvrqm_posision();
+            infomation_dev_by_toast_on_autojs("enter a vrqm page");
+
+            //this gesture function has a template
+        }
+        function main() {
+            // check_in();
+            for (let index = 0; index < 20; index++) {
+                sleep_certian_time();
+                Collect_the_treasure_chest();
+                sleep_certian_time();
+                loop_video_10_minute();
+            }
+        }
+        function Collect_the_treasure_chest() {
+            enter_kyub_vrqm_page();
+            infomation_dev_by_toast_on_autojs("sleep begin");
+            sleep_certian_time(1000 * 20);
+            infomation_dev_by_toast_on_autojs("click the treasure chest  position begin");
+            gesture__click_treasure_position();
+            infomation_dev_by_toast_on_autojs("click the treasure chest  position  end");
+
+        }
+        function check_in() {
+            enter_kyub_vrqm_page();
+            sleep_certian_time(1000 * 10);
+            gesture__projectKyub__click_check_in_posision();
+
+        }
+
+        function loop_video_10_minute(minute) {
+            minute = minute || 6;
+            enter_kyub_main_page();
             sleep_certian_time(1000 * 6);
+            minutes = 10;
+            let currentTime = Date.now();
+            while (Date.now() - currentTime < 1000 * 60 * minute) {
+                gesture__universal_swipe_up_in_xCenter();
+                sleep_certian_time(1000 * 6);
 
+            }
         }
+        main();
     }
-    main();
+    function todo() {
+
+        function __by_processExit() {
+            console.log("todo");
+            process.exit(1); // This will stop the program immediately
+        }
+
+        function __by_throw() {
+            console.log("todo");
+            throw new Error("todo");
+        }
+
+        __by_processExit();
+
+
+    }
+
+
+    function __projectQuarck() {
+        function enter_quarck_main_page() {
+            launch_new_app("com.quark.browser");
+        }
+
+    }
+
+
 }
-function todo() {
-
-    function __by_processExit() {
-        console.log("todo");
-        process.exit(1); // This will stop the program immediately
-    }
-
-    function __by_throw() {
-        console.log("todo");
-        throw new Error("todo");
-    }
-
-    __by_processExit();
-
-
-}
-
-
-function __projectQuarck() {
-    function enter_quarck_main_page() {
-        launch_new_app("com.quark.browser");
-    }
-
-}
-
-
-
 //---file:test
 function test() {
 

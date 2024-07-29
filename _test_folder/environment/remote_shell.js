@@ -11,7 +11,32 @@ stop adbd
 start adbd
 `;
 
-command = "am "
+command = "whoami"
+//关闭当前app的shell命令 root权限
+        //  this command is ok on high version android
+
+        //  this command is ok on lower version android ,such as lzdianPlay
+command_getCurrentApp_leidianPlay_lowerVersionAndroid="dumpsys window windows| grep -E 'mCurrentFocus' | awk '{print $3}'| cut -d '/' -f 1"
+command = `
+#!/bin/bash
+# 获取当前前台应用的包名
+CURRENT_APP_PACKAGE=$(dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $3}' | cut -d '/' -f 1)
+
+# 检查是否成功获取包名
+if [ -z "$CURRENT_APP_PACKAGE" ]; then
+  echo "无法获取当前应用的包名"
+  exit 1
+fi
+
+echo "当前应用包名: $CURRENT_APP_PACKAGE"
+
+# 使用root权限关闭当前应用
+su -c "am force-stop $CURRENT_APP_PACKAGE"
+
+echo "已关闭应用: $CURRENT_APP_PACKAGE"
+        
+        
+        `;
 let result = shell(command, is_root);
 log(result);
 if (is_show_console_on_devices) {
