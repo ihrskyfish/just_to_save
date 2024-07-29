@@ -16,19 +16,32 @@ __globalIhrglobal.miykstring = {};
 __globalIhrglobal.myPhone = {};
 
 
-// here need  human do it
+// here need  human do it BEGIN
 __globalIhrglobal.myPhone.xiaomi = "c804e69518e0c93d"
 __globalIhrglobal.myPhone.xiaomi10 = "f138246cceb63b2c"
 __globalIhrglobal.myPhone.vivoS10 = "63476539d7ebf0b7"
 __globalIhrglobal.myPhone.sp1228 = "d0b70f6e227bd2bf"
-__globalIhrglobal.myPhone.leidian = "default"
+__globalIhrglobal.myPhone.leidian = "5d2baf301fc3b11"
+// here need human do it END
 __globalIhrglobal.myPhone.leidian1 = "default"
 __globalIhrglobal.myPhone.leidian1 = "default"
 __globalIhrglobal.myPhone.default = "default"
 
-__globalIhrglobal.config= {}
+__globalIhrglobal.config = {}
 __globalIhrglobal.config[__globalIhrglobal.myPhone.sp1228] = {}
-__globalIhrglobal.config[__globalIhrglobal.myPhone.sp1228]["sleeP_time"] = 1000 * 2;
+__globalIhrglobal.config[__globalIhrglobal.myPhone.sp1228]["sleep_time"] = 1000 * 2;
+
+__globalIhrglobal.config[__globalIhrglobal.myPhone.leidian] = {}
+__globalIhrglobal.config[__globalIhrglobal.myPhone.leidian]["sleep_time"] = 1000 * 10;
+__globalIhrglobal.config[__globalIhrglobal.myPhone.leidian]["__enumKillWay"] = "root";
+
+const configVisoS10 = __globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10];
+__globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10] = {}
+__globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10]["sleep_time"] = 1000 * 2;
+__globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].x_width = 1080;
+__globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].y_width = 2400;
+__globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].x_dpi = 408;
+__globalIhrglobal.config[__globalIhrglobal.myPhone.vivoS10].x_dpi = x_dpi;
 
 const __globalXiaomi = __globalIhrglobal.myPhone.xiaomi;
 const __globalVivoS10 = __globalIhrglobal.myPhone.vivoS10;
@@ -121,6 +134,11 @@ function gesture__click_the_quvrqm_posision() {
     __by_widget();
 }
 
+
+function autojs_builtin_log(text) {
+    log(text);
+}
+
 function gesture_kill_current_app_on_the_recents_page() {
     //after failing , find that  the kill current app  on the recents page need a certain speed.whic is not supported in the leidian player 
     function __on_leidian_player() {
@@ -128,7 +146,7 @@ function gesture_kill_current_app_on_the_recents_page() {
         function __by_touch_file() {
             let password_string = "/storage/emulated/0/脚本/autoTask_gesture_delete_currentApp";
             let result = shell("touch " + password_string, false);
-            log(result);
+            autojs_builtin_log(result);
             // console.show();
 
             if (result.code == 0) {
@@ -337,7 +355,7 @@ function toast_shell(command, is_root, is_show_console_on_devices) {
     let is_root = is_root || false;
     let is_show_console_on_devices = is_show_console_on_devices || false;
     let result = shell(command, is_root);
-    log(result);
+    autojs_builtin_log(result);
     if (is_show_console_on_devices) {
         console.show();
     }
@@ -358,7 +376,7 @@ function kill_current_app(__emunKillWay) {
     function kill_current_app_by_shell(params) {
 
         let command = `
-        #!/bin/bash
+#!/bin/bash
 # 获取当前应用的包名
 CURRENT_APP_PACKAGE=$(adb shell dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
 # 检查是否成功获取包名
@@ -564,7 +582,7 @@ function test() {
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-test();
+// test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
