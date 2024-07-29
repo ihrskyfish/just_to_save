@@ -18,12 +18,17 @@ __globalIhrglobal.myPhone = {};
 
 // here need  human do it
 __globalIhrglobal.myPhone.xiaomi = "c804e69518e0c93d"
+__globalIhrglobal.myPhone.xiaomi10 = "f138246cceb63b2c"
 __globalIhrglobal.myPhone.vivoS10 = "63476539d7ebf0b7"
 __globalIhrglobal.myPhone.sp1228 = "d0b70f6e227bd2bf"
 __globalIhrglobal.myPhone.leidian = "default"
 __globalIhrglobal.myPhone.leidian1 = "default"
 __globalIhrglobal.myPhone.leidian1 = "default"
 __globalIhrglobal.myPhone.default = "default"
+
+__globalIhrglobal.config= {}
+__globalIhrglobal.config[__globalIhrglobal.myPhone.sp1228] = {}
+__globalIhrglobal.config[__globalIhrglobal.myPhone.sp1228]["sleeP_time"] = 1000 * 2;
 
 const __globalXiaomi = __globalIhrglobal.myPhone.xiaomi;
 const __globalVivoS10 = __globalIhrglobal.myPhone.vivoS10;
@@ -32,7 +37,19 @@ const __globalDefaultPhone = __globalIhrglobal.myPhone.default;
 __globalIhrglobal.miykstring.sleep_time_default_this_devices = 1000 * 2;
 __globalIhrglobal.miykstring.__emunKillWay = "manyBacks";
 __globalIhrglobal.miykstring.__emunKillWay = "gesture";
-__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList = device.getAndroidId();
+__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList = ihrGetAndroidId();
+
+function ihrGetAndroidId() {
+    if (device.getAndroidId() == __globalIhrglobal.myPhone.xiaomi10) {
+        console.log("xiaomi0 as xiaomi");
+        return __globalIhrglobal.myPhone.xiaomi;
+    }
+
+
+    console.log("default as default");
+    return device.getAndroidId();
+}
+
 __globalIhrglobal.miykstring.__emunLanchWay = "launchApi";
 __globalIhrglobal.dev_stage = "test";
 
@@ -166,6 +183,13 @@ function gesture_kill_current_app_on_the_recents_page() {
         swipe(x_start, y_start, x_end, y_end, 100);
     }
     __classfunctionmap2[__globalIhrglobal.myPhone.xiaomi] = function () {
+        x_start = 268;
+        y_start = 1633;
+        x_end = x_start - 250;
+        y_end = y_start;
+        swipe(x_start, y_start, x_end, y_end, 1000);
+    }
+    __classfunctionmap2[__globalIhrglobal.myPhone.xiaomi10] = function () {
         x_start = 268;
         y_start = 1633;
         x_end = x_start - 250;
@@ -350,8 +374,6 @@ echo "已关闭应用: $CURRENT_APP_PACKAGE"
         toast_shell(command);
     }
 
-    function kill_current_app_by_backButton_many_times(params) {
-    }
     __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
     infomation_dev_by_toast_on_autojs("kill_current_app");
@@ -493,7 +515,7 @@ function project_kyub() {
         minute = minute || 6;
         enter_kyub_main_page();
         sleep_certian_time(1000 * 6);
-        minutes = 6;
+        minutes = 10;
         let currentTime = Date.now();
         while (Date.now() - currentTime < 1000 * 60 * minute) {
             gesture__universal_swipe_up_in_xCenter();
@@ -546,6 +568,5 @@ test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
-
 //  gesture__click_treasure_position();
-
+// gesture_kill_current_app_on_the_recents_page();
