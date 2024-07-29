@@ -70,6 +70,19 @@ __globalIhrglobal.dev_stage = "test";
 // setScreenMetrics(ihrglobal.x_width, ihrglobal.y_high);
 
 // ths gesture function can be used in xiaomi phone in 快手刷视频
+function autojs_builtin_click(x, y) {
+    return click(x, y);
+}
+
+
+function gesture__universal_click_xCenter_manyTime_10even_y() {
+    for (let index = 1; index < 10; index++) {
+        sleep_certian_time();
+        click(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 10 * element);
+    }
+}
+
+
 function gesture__universal_swipe_up_in_xCenter() {
     swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 3 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 4, 100);
 }
@@ -535,6 +548,7 @@ function ensure_file_content(file_path, text, encoding) {
     files.ensureDir(file_path);
     return files.write(file_path, text, encoding)
 }
+
 
 
 
