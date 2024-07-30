@@ -1,6 +1,8 @@
 
 
 
+
+
 // NOTE  this version can not directly set a value  in a non-exist key in a object
 
 var __globalIhrglobal = {};
