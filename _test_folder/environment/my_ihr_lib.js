@@ -410,7 +410,7 @@ function toast_shell(command, is_root, is_show_console_on_devices) {
 function launch_new_quarck_browser() {
 }
 
-
+ 
 // ehre is a problem is that some app can be dual on some phone ,but not on other phone
 function gesture__select_dualApp(number) {
     number = number || 1;
