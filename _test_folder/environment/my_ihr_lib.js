@@ -380,6 +380,11 @@ function run_shell(__enumPrivilege, command) {
     return result;
 
 }
+
+function sleep_devices_dependient_base_on_default_time(time) {
+
+}
+
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
 function project_kyub() {
 
@@ -397,7 +402,7 @@ function project_kyub() {
         //this gesture function has a template
     }
     function main() {
-        // check_in();
+        check_in();
         for (let index = 0; index < 20 * 2; index++) {
             sleep_certian_time();
             Collect_the_treasure_chest();
