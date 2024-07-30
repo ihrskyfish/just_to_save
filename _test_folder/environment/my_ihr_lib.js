@@ -76,9 +76,13 @@ function autojs_builtin_click(x, y) {
 
 
 function gesture__universal_click_xCenter_manyTime_10even_y() {
-    for (let index = 1; index < 10; index++) {
+    const howManyEven = 100;
+    for (let index = 1; index < howManyEven; index++) {
         sleep_certian_time();
-        click(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 10 * element);
+        let x_start = __globalIhrglobal.x_width / 2;
+        let y_start = __globalIhrglobal.y_high * index / howManyEven ;
+        click(x_start, y_start);
+        infomation_dev_by_toast_on_autojs(""+x_start+" "+y_start);
     }
 }
 
@@ -104,8 +108,8 @@ function gesture__click_treasure_position() {
 
     let __classfunctionmap2 = {};
     __classfunctionmap2[__globalIhrglobal.myPhone.default] = function () {
-        let x_start = device.width * 0.877193;
-        let y_start = device.height * 0.891167;
+        let x_start = __globalIhrglobal.x_width * 0.877193;
+        let y_start = __globalIhrglobal.x_width * 0.891167;
         click(x_start, y_start);
     }
     __classfunctionmap2[__globalIhrglobal.myPhone.vivoS10] = function () {
@@ -257,38 +261,8 @@ function __projectGesture__next_video() {
 }
 
 function gesture__projectKyub__click_check_in_posision() {
+    gesture__universal_click_xCenter_manyTime_10even_y();
 
-    let functionMap__classMyPhoneList = {
-        "sp1228": function () {
-            let x_start = 1040;
-            let y_start = 1600;
-            click(x_start, y_start);
-        },
-        "leidian": function () {
-            let x_start = 830;
-            let y_start = 1800;
-            click(x_start, y_start);
-
-        },
-        xiaomi: function () {
-            let x_start = 830;
-            let y_start = 1800;
-            click(x_start, y_start);
-
-        },
-        vivoS10: function () {
-            let x_start = 830;
-            let y_start = 1800;
-            click(x_start, y_start);
-
-        },
-    };
-
-    if (functioMap__classMyPhoneList[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList]) {
-        functionMap__classMyPhoneList[__globalIhrglobal.miykstring.currentDevices__emunMyPhoneList](); // This will execute myFunction1
-    } else {
-        console.log("Function not found");
-    }
 
 }
 
@@ -422,7 +396,7 @@ function project_kyub() {
         //this gesture function has a template
     }
     function main() {
-        // check_in();
+        check_in();
         for (let index = 0; index < 20; index++) {
             sleep_certian_time();
             Collect_the_treasure_chest();
@@ -440,9 +414,12 @@ function project_kyub() {
 
     }
     function check_in() {
-        enter_kyub_vrqm_page();
-        sleep_certian_time(1000 * 10);
-        gesture__projectKyub__click_check_in_posision();
+        for (let index = 0; index < 2; index++) {
+            enter_kyub_vrqm_page();
+            sleep_certian_time(1000 * 10);
+            gesture__projectKyub__click_check_in_posision();
+
+        }
 
     }
 
@@ -646,3 +623,4 @@ test();
 // device.getAndroidId();
 //  gesture__click_treasure_position();
 // gesture_kill_current_app_on_the_recents_page();
+// gesture__universal_click_xCenter_manyTime_10even_y() 
