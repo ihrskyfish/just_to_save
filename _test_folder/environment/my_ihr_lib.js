@@ -81,9 +81,9 @@ function gesture__universal_click_xCenter_manyTime_10even_y() {
     for (let index = 1; index < howManyEven; index++) {
         sleep_certian_time();
         let x_start = __globalIhrglobal.x_width / 2;
-        let y_start = __globalIhrglobal.y_high * index / howManyEven ;
+        let y_start = __globalIhrglobal.y_high * index / howManyEven;
         click(x_start, y_start);
-        infomation_dev_by_toast_on_autojs(""+x_start+" "+y_start);
+        infomation_dev_by_toast_on_autojs("" + x_start + " " + y_start);
     }
 }
 
@@ -398,7 +398,7 @@ function project_kyub() {
     }
     function main() {
         // check_in();
-        for (let index = 0; index < 20 * 2 ; index++) {
+        for (let index = 0; index < 20 * 2; index++) {
             sleep_certian_time();
             Collect_the_treasure_chest();
             sleep_certian_time();
@@ -615,6 +615,18 @@ function test() {
     project_kyub();
 
 }
+
+
+function afterFunction(afterFunction, __classFunctionDirectly) {
+   __classFunctionDirectly();
+    afterFunction();
+ }
+
+function wrappFunction(wrapeFunction, __classFunctionDirectly) {
+   wrapeFunction();
+   __classFunctionDirectly();
+   wrapeFunction();
+ }
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
