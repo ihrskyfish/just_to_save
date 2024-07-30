@@ -397,8 +397,8 @@ function project_kyub() {
         //this gesture function has a template
     }
     function main() {
-        check_in();
-        for (let index = 0; index < 20; index++) {
+        // check_in();
+        for (let index = 0; index < 20 * 2 ; index++) {
             sleep_certian_time();
             Collect_the_treasure_chest();
             sleep_certian_time();
@@ -425,7 +425,7 @@ function project_kyub() {
     }
 
     function loop_video_10_minute(minute) {
-        minute = minute || 6;
+        minute = minute || 10;
         enter_kyub_main_page();
         sleep_certian_time(1000 * 6);
         minutes = 10;
