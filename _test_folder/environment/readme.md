@@ -40,3 +40,6 @@ __gesture
 因为对于非root的手机难以快速 部署一个已经有了数据的应用,所以autojs如果搭配其他东西可以使用,但是最后决定不使用了,能用autojs解决的事情就不常用其他东西了
 
 
+
+
+some app always  request permission  that  broke  program 's running,   so  need fake permission

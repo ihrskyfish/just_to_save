@@ -387,8 +387,6 @@ function sleep_devices_dependient_base_on_default_time(time) {
 
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
 function project_kyub() {
-
-
     function enter_kyub_main_page() {
         launch_new_app("com.kuaishou.nebula");
     }
@@ -642,3 +640,4 @@ test();
 //  gesture__click_treasure_position();
 // gesture_kill_current_app_on_the_recents_page();
 // gesture__universal_click_xCenter_manyTime_10even_y() 
+
