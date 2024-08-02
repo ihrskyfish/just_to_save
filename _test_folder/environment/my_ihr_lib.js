@@ -269,10 +269,10 @@ function gesture__projectKyub__click_check_in_posision() {
 
 
 }
-const __projectGesture__next_video = (function() {
+const __projectGesture__next_video = (function () {
     const functions = [gesture__universal_swipe_up_in_xCenter0, gesture__universal_swipe_up_in_xCenter2];
     let currentIndex = 0;
-    return function() {
+    return function () {
         functions[currentIndex]();
         currentIndex = (currentIndex + 1) % functions.length;
     };
