@@ -653,3 +653,4 @@ test();
 // gesture_kill_current_app_on_the_recents_page();
 // gesture__universal_click_xCenter_manyTime_10even_y() 
 
+
