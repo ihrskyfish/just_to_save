@@ -87,8 +87,13 @@ function gesture__universal_click_xCenter_manyTime_10even_y() {
     }
 }
 
+function gesture__universal_swipe_up_in_xCenter2() {
+    swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 2 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 8, 100);
+}
 
-function gesture__universal_swipe_up_in_xCenter() {
+
+
+function gesture__universal_swipe_up_in_xCenter0() {
     swipe(__globalIhrglobal.x_width / 2, __globalIhrglobal.y_high * 3 / 4, __globalIhrglobal.x_width / 2, __globalIhrglobal.y_high / 4, 100);
 }
 
@@ -257,8 +262,13 @@ function gesture_kill_current_app_on_the_recents_page() {
 
 
 
+
+// let __projectGesture__next_video= 1
+// 本来想弄一个每次执行这个函数,都执行一个不同的函数,但 直接弄连续刷两个视频算了
 function __projectGesture__next_video() {
-    gesture__universal_swipe_up_in_xCenter();
+    gesture__universal_swipe_up_in_xCenter0();
+    sleep_certian_time(1000 * 5);
+    gesture__universal_swipe_up_in_xCenter2();
 }
 
 function gesture__projectKyub__click_check_in_posision() {
@@ -434,7 +444,7 @@ function project_kyub() {
         minutes = 10;
         let currentTime = Date.now();
         while (Date.now() - currentTime < 1000 * 60 * minute) {
-            gesture__universal_swipe_up_in_xCenter();
+            __projectGesture__next_video();
             sleep_certian_time(1000 * 6);
 
         }
@@ -621,15 +631,15 @@ function test() {
 
 
 function afterFunction(afterFunction, __classFunctionDirectly) {
-   __classFunctionDirectly();
+    __classFunctionDirectly();
     afterFunction();
- }
+}
 
 function wrappFunction(wrapeFunction, __classFunctionDirectly) {
-   wrapeFunction();
-   __classFunctionDirectly();
-   wrapeFunction();
- }
+    wrapeFunction();
+    __classFunctionDirectly();
+    wrapeFunction();
+}
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
