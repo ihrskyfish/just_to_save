@@ -263,19 +263,21 @@ function gesture_kill_current_app_on_the_recents_page() {
 
 
 
-// let __projectGesture__next_video= 1
-// 本来想弄一个每次执行这个函数,都执行一个不同的函数,但 直接弄连续刷两个视频算了
-function __projectGesture__next_video() {
-    gesture__universal_swipe_up_in_xCenter0();
-    sleep_certian_time(1000 * 5);
-    gesture__universal_swipe_up_in_xCenter2();
-}
 
 function gesture__projectKyub__click_check_in_posision() {
     gesture__universal_click_xCenter_manyTime_10even_y();
 
 
 }
+const __projectGesture__next_video = (function() {
+    const functions = [gesture__universal_swipe_up_in_xCenter0, gesture__universal_swipe_up_in_xCenter2];
+    let currentIndex = 0;
+    return function() {
+        functions[currentIndex]();
+        currentIndex = (currentIndex + 1) % functions.length;
+    };
+})();
+
 
 //---file: my_ihr_lib.js
 
