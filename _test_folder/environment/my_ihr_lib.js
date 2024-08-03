@@ -157,6 +157,23 @@ function gesture__click_the_quvrqm_posision() {
     __by_widget();
 }
 
+function randomSleep(__classMilliseconds_start_random, __classMilliseconds_end_random) {
+
+    function __version1() {
+        const randomTime = Math.floor(Math.random() * __classMilliseconds_end_random) + __classMilliseconds_start_random; 
+        sleep(randomTime);
+    }
+    function __version2() {
+        const start = new Date().getTime();
+        while (new Date().getTime() - start < milliseconds) {
+            // 忙等待
+        }
+    }
+
+    __version1();
+
+}
+
 
 function autojs_builtin_log(text) {
     log(text);
@@ -447,7 +464,7 @@ function project_kyub() {
         let currentTime = Date.now();
         while (Date.now() - currentTime < 1000 * 60 * minute) {
             __projectGesture__next_video();
-            sleep_certian_time(1000 * 6);
+            randomSleep(1000 * 2, 1000 * 6);
 
         }
     }
