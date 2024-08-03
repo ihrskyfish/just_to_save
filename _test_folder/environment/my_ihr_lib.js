@@ -288,24 +288,6 @@ function sleep_certian_time(time_long) {
     sleep(true_time_long);
 }
 
-function randomSleep(__classMilliseconds_start_random, __classMilliseconds_end_random) {
-
-    function __version1() {
-        const randomTime = Math.floor(Math.random() * __classMilliseconds_end_random) + __classMilliseconds_start_random; 
-        sleep(randomTime);
-    }
-    function __version2() {
-        const start = new Date().getTime();
-        while (new Date().getTime() - start < milliseconds) {
-            // 忙等待
-        }
-    }
-
-    __version1();
-
-}
-
-// 使用示例
 
 //BZ
 function stay_home_page_with_unlock() {
@@ -446,7 +428,8 @@ function project_kyub() {
         gesture__click_treasure_position();
         infomation_dev_by_toast_on_autojs("click the treasure chest  position  end");
 
-j
+    }
+    function check_in() {
         for (let index = 0; index < 2; index++) {
             enter_kyub_vrqm_page();
             sleep_certian_time(1000 * 10);
@@ -464,12 +447,10 @@ j
         let currentTime = Date.now();
         while (Date.now() - currentTime < 1000 * 60 * minute) {
             __projectGesture__next_video();
-            randomSleep(1000 * 1, 1000 * 6);
+            sleep_certian_time(1000 * 6);
 
         }
     }
-
-
     main();
 }
 function kill_cuurent_app_by_shell() {
@@ -611,12 +592,6 @@ function get_environment_info() {
     }
 
 }
-// function randomSleep() {
-//     return new Promise(resolve => {
-//         const delay = Math.floor(Math.random() * 10000); // Random delay between 0 to 10000 milliseconds (0 to 10 seconds)
-//         setTimeout(resolve, delay);
-//     });
-// }
 
 
 // need accessibility service ,
@@ -680,15 +655,3 @@ test();
 
 
 
-
-// function randomSleep() {
-// return new Promise(resolve => {
-// const randomTime = Math.floor(Math.random() * 2000) + 4000; // 4 to 6 seconds
-// setTimeout(resolve, randomTime);
-// });
-// }
-// 
-使用示例
-// randomSleep().then(() => {
-// console.log('Slept for a random time between 4 to 6 seconds');
-// });
