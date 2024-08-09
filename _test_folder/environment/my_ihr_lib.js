@@ -385,8 +385,6 @@ function toastAndlogAnd_showConsole_shell(command, is_root, is_show_console_on_d
     return result;
 }
 
-function launch_new_quarck_browser() {
-}
 
 
 
@@ -511,18 +509,6 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 }
 
 function kill_current_app_by_call_termux(packageName) {
-    let command_tmp =  "'"+  "shell  am force-stop " + packageName + "'";
-
-
-    command= "am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
--a com.termux.RUN_COMMAND \
---es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/adb' \
---esa com.termux.RUN_COMMAND_ARGUMENTS "+command_tmp+" \
---es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
---ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
---es com.termux.RUN_COMMAND_SESSION_ACTION '0'"
-
-
 }
 function kill_current_app(__emunKillWay) {
 
@@ -604,7 +590,8 @@ function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
     infomation_dev_by_toast_on_autojs("back button");
     back()
     sleep_certian_time();
-    kill_current_app(__enumKillWay);
+    kill_app_by_call_termux(PackageName);
+    kill_app_by_call_termux(PackageName);
     sleep_certian_time();
     launch_app_start_on_the_home(PackageName);
     // if (__enumLaunchWay == "new") {
