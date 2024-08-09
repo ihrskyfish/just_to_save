@@ -160,7 +160,7 @@ function gesture__click_the_quvrqm_posision() {
 function randomSleep(__classMilliseconds_start_random, __classMilliseconds_end_random) {
 
     function __version1() {
-        const randomTime = Math.floor(Math.random() * __classMilliseconds_end_random) + __classMilliseconds_start_random; 
+        const randomTime = Math.floor(Math.random() * __classMilliseconds_end_random) + __classMilliseconds_start_random;
         sleep(randomTime);
     }
     function __version2() {
@@ -368,7 +368,7 @@ function back_many_times() {
 
 
 
-function toast_shell(command, is_root, is_show_console_on_devices) {
+function toastAndlogAnd_showConsole_shell(command, is_root, is_show_console_on_devices) {
     let is_root = is_root || false;
     let is_show_console_on_devices = is_show_console_on_devices || false;
     let result = shell(command, is_root);
@@ -495,7 +495,35 @@ echo "已关闭应用: $CURRENT_APP_PACKAGE"
 
 
 }
+function kill_app_by_call_termux(packageName) {
 
+    command=`
+am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
+-a com.termux.RUN_COMMAND \
+--es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/adb' \
+--esa com.termux.RUN_COMMAND_ARGUMENTS 'shell,am,force-stop,${packageName}' \
+--es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
+--ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
+--es com.termux.RUN_COMMAND_SESSION_ACTION '0'
+    `
+
+  toastAndlogAnd_showConsole_shell(command);
+}
+
+function kill_current_app_by_call_termux(packageName) {
+    let command_tmp =  "'"+  "shell  am force-stop " + packageName + "'";
+
+
+    command= "am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
+-a com.termux.RUN_COMMAND \
+--es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/adb' \
+--esa com.termux.RUN_COMMAND_ARGUMENTS "+command_tmp+" \
+--es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
+--ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
+--es com.termux.RUN_COMMAND_SESSION_ACTION '0'"
+
+
+}
 function kill_current_app(__emunKillWay) {
 
     function kill_cuurent_app_by_shell() {
@@ -514,7 +542,7 @@ echo "当前应用包名: $CURRENT_APP_PACKAGE"
 adb shell am force-stop "$CURRENT_APP_PACKAGE"
 echo "已关闭应用: $CURRENT_APP_PACKAGE"
         `;
-        toast_shell(command);
+        toastAndlogAnd_showConsole_shell(command);
     }
 
     __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
@@ -662,7 +690,7 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-test();
+// test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
@@ -671,4 +699,5 @@ test();
 // gesture__universal_click_xCenter_manyTime_10even_y() 
 
 
+toast("hello world");
 
