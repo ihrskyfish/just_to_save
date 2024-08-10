@@ -2,8 +2,12 @@
 
 
 var autoxjsBuiltinApi = {};
-tmp=files
+var tmp = files
 autoxjsBuiltinApi.files = tmp;
+
+tmp=open
+autoxjsBuiltinApi.files.open = tmp;
+
 // NOTE  this version can not directly set a value  in a non-exist key in a object
 
 var __globalIhrglobal = {};
@@ -587,17 +591,37 @@ function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
 }
 
 
+
+function get_folder_used_by_autoxjs_for_some_special_use() {
+    let folder_used_by_autoxjs_for_some_special_use = "/sdcard/脚本/some_special_use";
+    autoxjsBuiltinApi.files.ensureDir(folder_used_by_autoxjs_for_some_special_use);
+    return folder_used_by_autoxjs_for_some_special_use;
+}
+
+function syn_lock_get(string) {
+     
+    
+    fileName =autoxjsBuiltinApi.files.join(get_folder_used_by_autoxjs_for_some_special_use(), string)
+    return autoxjsBuiltinApi.files.open(fileName, "w");
+}
+
+function syn_lock_release(file_handle) {
+    file_handle.close()
+}
+
+
+
 function get_current_app() {
 
-    output_file="/sdcard/脚本/result_from_call_termux.txt"
-    basic_command= `
+    output_file = "/sdcard/脚本/result_from_call_termux.txt"
+    basic_command = `
 adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut -d '/' -f 1 
 `
- command = basic_command + ' > ' + output_file;
- call_termux(command);
+    command = basic_command + ' > ' + output_file;
+    call_termux(command);
 
 
- stdout=autoxjsBuiltinApi.files.read(output_file);
+    stdout = autoxjsBuiltinApi.files.read(output_file);
 
 
     return stdout;
