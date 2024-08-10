@@ -412,10 +412,13 @@ function sleep_devices_dependient_base_on_default_time(time) {
 
 }
 
+
+
+var project_kyub_packageName = "com.kuaishou.nebula";
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
 function project_kyub() {
     function enter_kyub_main_page() {
-        launch_new_app("com.kuaishou.nebula");
+        launch_new_app(project_kyub_packageName);
     }
 
     function enter_kyub_vrqm_page() {
@@ -434,6 +437,7 @@ function project_kyub() {
             sleep_certian_time();
             loop_video_10_minute();
         }
+        kill_app_by_call_termux(project_kyub_packageName);
     }
     function Collect_the_treasure_chest() {
         enter_kyub_vrqm_page();
@@ -468,31 +472,6 @@ function project_kyub() {
     }
     main();
 }
-function kill_cuurent_app_by_shell() {
-
-    let command = `
-#!/bin/bash
-# 获取当前前台应用的包名
-CURRENT_APP_PACKAGE=$(dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
-
-# 检查是否成功获取包名
-if [ -z "$CURRENT_APP_PACKAGE" ]; then
-  echo "无法获取当前应用的包名"
-  exit 1
-fi
-
-echo "当前应用包名: $CURRENT_APP_PACKAGE"
-
-# 使用root权限关闭当前应用
-su -c "am force-stop $CURRENT_APP_PACKAGE"
-
-echo "已关闭应用: $CURRENT_APP_PACKAGE"
-        
-        
-        `;
-
-
-}
 function kill_app_by_call_termux(packageName) {
 
     command=`
@@ -512,24 +491,7 @@ function kill_current_app_by_call_termux(packageName) {
 }
 function kill_current_app(__emunKillWay) {
 
-    function kill_cuurent_app_by_shell() {
-
-        let command = `
-#!/bin/bash
-# 获取当前应用的包名
-CURRENT_APP_PACKAGE=$(adb shell dumpsys window windows | grep -E 'mCurrentFocus' | awk '{print $4}' | cut -d '/' -f 1)
-# 检查是否成功获取包名
-if [ -z "$CURRENT_APP_PACKAGE" ]; then
-  echo "无法获取当前应用的包名"
-  exit 1
-fi
-echo "当前应用包名: $CURRENT_APP_PACKAGE"
-# 关闭当前应用
-adb shell am force-stop "$CURRENT_APP_PACKAGE"
-echo "已关闭应用: $CURRENT_APP_PACKAGE"
-        `;
-        toastAndlogAnd_showConsole_shell(command);
-    }
+    
 
     __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
@@ -677,7 +639,7 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-// test();
+test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
@@ -686,5 +648,5 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 // gesture__universal_click_xCenter_manyTime_10even_y() 
 
 
-toast("hello world");
+// toast("hello world");
 
