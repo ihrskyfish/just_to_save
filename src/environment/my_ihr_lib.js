@@ -1,7 +1,9 @@
 
 
 
-
+var autoxjsBuiltinApi = {};
+tmp=files
+autoxjsBuiltinApi.files = tmp;
 // NOTE  this version can not directly set a value  in a non-exist key in a object
 
 var __globalIhrglobal = {};
@@ -472,9 +474,26 @@ function project_kyub() {
     }
     main();
 }
+
+
+function call_termux(call_termux_string_command) {
+
+    command = `
+am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
+-a com.termux.RUN_COMMAND \
+--es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/${call_termux_string_command}' \
+--esa com.termux.RUN_COMMAND_ARGUMENTS '' \
+--es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
+--ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
+--es com.termux.RUN_COMMAND_SESSION_ACTION '0'
+    `
+
+    toastAndlogAnd_showConsole_shell(command);
+
+}
 function kill_app_by_call_termux(packageName) {
 
-    command=`
+    command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
 --es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/adb' \
@@ -484,14 +503,14 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
     `
 
-  toastAndlogAnd_showConsole_shell(command);
+    toastAndlogAnd_showConsole_shell(command);
 }
 
 function kill_current_app_by_call_termux(packageName) {
 }
 function kill_current_app(__emunKillWay) {
 
-    
+
 
     __emunKillWay = __emunKillWay || __globalIhrglobal.miykstring.__emunKillWay;
 
@@ -553,7 +572,6 @@ function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
     back()
     sleep_certian_time();
     kill_app_by_call_termux(PackageName);
-    kill_app_by_call_termux(PackageName);
     sleep_certian_time();
     launch_app_start_on_the_home(PackageName);
     // if (__enumLaunchWay == "new") {
@@ -568,6 +586,29 @@ function launch_new_app(PackageName, __enumLaunchWay, __enumKillWay) {
     // }
 }
 
+
+function get_current_app() {
+
+    output_file="/sdcard/脚本/result_from_call_termux.txt"
+    basic_command= `
+adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut -d '/' -f 1 
+`
+ command = basic_command + ' > ' + output_file;
+ call_termux(command);
+
+
+ stdout=autoxjsBuiltinApi.files.read(output_file);
+
+
+    return stdout;
+}
+
+function is_dual_APP(packageName) {
+    launch_new_app(packageName);
+    sleep_certian_time();
+    get_current_app();
+
+}
 
 function main(params) {
     auto();
@@ -645,7 +686,7 @@ test();
 // device.getAndroidId();
 //  gesture__click_treasure_position();
 // gesture_kill_current_app_on_the_recents_page();
-// gesture__universal_click_xCenter_manyTime_10even_y() 
+// gesture__universal_click_xCenter_manyTime_10even_y()
 
 
 // toast("hello world");
