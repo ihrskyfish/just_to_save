@@ -1,11 +1,11 @@
-
+var ok_reqire = require;
 
 
 var autoxjsBuiltinApi = {};
 var tmp = files
 autoxjsBuiltinApi.files = tmp;
 
-tmp=open
+tmp = open
 autoxjsBuiltinApi.files.open = tmp;
 
 // NOTE  this version can not directly set a value  in a non-exist key in a object
@@ -479,6 +479,17 @@ function project_kyub() {
     main();
 }
 
+function generateRandomString(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+
 
 function call_termux(call_termux_string_command) {
 
@@ -490,9 +501,16 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 --es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
 --ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
-    `
+    `.trim();
 
     toastAndlogAnd_showConsole_shell(command);
+
+}
+
+
+function read_output_file_termux(output_file) {
+
+    let stdout = autoxjsBuiltinApi.files.read(output_file);
 
 }
 function kill_app_by_call_termux(packageName) {
@@ -599,9 +617,9 @@ function get_folder_used_by_autoxjs_for_some_special_use() {
 }
 
 function syn_lock_get(string) {
-     
-    
-    fileName =autoxjsBuiltinApi.files.join(get_folder_used_by_autoxjs_for_some_special_use(), string)
+
+
+    fileName = autoxjsBuiltinApi.files.join(get_folder_used_by_autoxjs_for_some_special_use(), string)
     return autoxjsBuiltinApi.files.open(fileName, "w");
 }
 
@@ -613,15 +631,17 @@ function syn_lock_release(file_handle) {
 
 function get_current_app() {
 
-    output_file = "/sdcard/脚本/result_from_call_termux.txt"
-    basic_command = `
+    let output_file = "/sdcard/脚本/result_from_call_termux.txt"
+    let basic_command = `
 adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut -d '/' -f 1 
-`
-    command = basic_command + ' > ' + output_file;
+`.trim();
+    let command = basic_command + ' > ' + output_file;
     call_termux(command);
+    // here should be wait until the termux call is finished ,but ,it is hard to do it in the autojs
+    sleep(1000 * 2);
 
 
-    stdout = autoxjsBuiltinApi.files.read(output_file);
+    let stdout = autoxjsBuiltinApi.files.read(output_file);
 
 
     return stdout;
@@ -630,7 +650,12 @@ adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut 
 function is_dual_APP(packageName) {
     launch_new_app(packageName);
     sleep_certian_time();
-    get_current_app();
+    var current_packageName = get_current_app();
+    if (current_packageName == packageName) {
+        return false;
+    } else {
+        return true;
+    }
 
 }
 
