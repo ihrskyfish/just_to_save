@@ -493,24 +493,28 @@ function generateRandomString(length) {
 
 function call_termux(call_termux_string_command) {
 
+    let file_path = generateRandomString(26);
+    let file_path1 = '/sdcard/脚本/' + file_path;
     command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
---es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/${call_termux_string_command}' \
+--es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/${call_termux_string_command} > ${file_path1} ' \
 --esa com.termux.RUN_COMMAND_ARGUMENTS '' \
 --es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
 --ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
     `.trim();
-
     toastAndlogAnd_showConsole_shell(command);
-
+    return file_path1;
 }
 
 
 function read_output_file_termux(output_file) {
-
+    while (!autoxjsBuiltinApi.files.exists(output_file)) {
+    }
     let stdout = autoxjsBuiltinApi.files.read(output_file);
+    autoxjsBuiltinApi.files.remove(output_file);
+    return stdout;
 
 }
 function kill_app_by_call_termux(packageName) {
