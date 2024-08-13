@@ -690,10 +690,7 @@ function get_current_app() {
     let command = `
 adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut -d '/' -f 1 
 `;
-    call_termux(command);
-
     current_packageName= call_termux_by_file_with_result(command);
-
 
     return current_packageName;
 }
