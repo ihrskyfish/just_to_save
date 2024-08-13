@@ -692,8 +692,7 @@ adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut 
 `;
     call_termux(command);
 
-    let output_file = call_termux_by_file(command);
-    let current_packageName = read_output_file_termux(output_file);
+    current_packageName= call_termux_by_file_with_result(command);
 
 
     return current_packageName;
@@ -791,9 +790,8 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 
 // toast("hello world");
-let tmp = call_termux_by_file("pwd ; echo 1111111 ; whoami");
 // tmp = read_output_file_termux(tmp);
 // console.log(tmp);
 
-d(get_current_app());
-kill_current_app_by_call_termux()
+// d(get_current_app());
+// kill_current_app_by_call_termux()
