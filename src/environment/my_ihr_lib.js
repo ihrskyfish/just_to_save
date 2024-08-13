@@ -520,12 +520,16 @@ function call_termux_by_file(call_termux_string_command) {
     // let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.bash`;
     let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.txt`;
 
+
+
+    // 删除一句是删除自己,此时已经完全读入内存中,所以可以删除文件
     call_termux_string_command = call_termux_string_command + `
     rm ${call_termux_exec_file_path}
     `.trimEnd();
 
     ensure_file_content(call_termux_exec_file_path, call_termux_string_command);
     let miyk_output_file_path1 = '/sdcard/脚本/tmp_output_from_call_termux_' + file_path_part + '.txt';
+    let ok_miyk_output_file_path1 = miyk_output_file_path1+'.ok';
 
 
 
@@ -543,7 +547,7 @@ function call_termux_by_file(call_termux_string_command) {
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
 --es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/bash' \
---esa com.termux.RUN_COMMAND_ARGUMENTS '-c, bash  ${call_termux_exec_file_path}  &>  ${miyk_output_file_path1} ' \
+--esa com.termux.RUN_COMMAND_ARGUMENTS '-c, bash  ${call_termux_exec_file_path}  &>  ${miyk_output_file_path1} ; touch ${ok_miyk_output_file_path1} ' \
 --es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
 --ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
@@ -555,18 +559,21 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 }
 
 function read_output_file_termux(output_file) {
-    while (!autoxjsBuiltinApi.files.exists(output_file)) {
+    let ok_output_file= output_file+'.ok';
+
+    while (!autoxjsBuiltinApi.files.exists(ok_output_file)) {
         console.log("wait for the file to be created");
     }
 
-    // 这个的一般比termux先打开
-    autoxjsBuiltinApi.files.write(output_file, 'aaa');
-    sleep(1000 * 2);
+    // 这个的一般比termux先打开 下面的语句仅仅是测试 
+    // autoxjsBuiltinApi.files.write(output_file, 'aaa');
+    // sleep(1000 * 2);
 
 
     let output = autoxjsBuiltinApi.files.read(output_file);
 
     autoxjsBuiltinApi.files.remove(output_file);
+    autoxjsBuiltinApi.files.remove(ok_output_file);
     return output;
 
 }
@@ -795,7 +802,7 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 
 // toast("hello world");
-let tmp = call_termux_by_file("pwd ; echo 1111111");
+let tmp = call_termux_by_file("pwd ; echo 1111111 ; whoami");
 tmp = read_output_file_termux(tmp);
 console.log(tmp);
 
