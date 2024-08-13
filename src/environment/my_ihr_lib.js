@@ -520,8 +520,6 @@ function call_termux_by_file(call_termux_string_command) {
     // let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.bash`;
     let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.txt`;
 
-
-
     // 删除一句是删除自己,此时已经完全读入内存中,所以可以删除文件
     call_termux_string_command = call_termux_string_command + `
     rm ${call_termux_exec_file_path}
@@ -529,20 +527,9 @@ function call_termux_by_file(call_termux_string_command) {
 
     ensure_file_content(call_termux_exec_file_path, call_termux_string_command);
     let miyk_output_file_path1 = '/sdcard/脚本/tmp_output_from_call_termux_' + file_path_part + '.txt';
-    let ok_miyk_output_file_path1 = miyk_output_file_path1+'.ok';
+    let ok_miyk_output_file_path1 = miyk_output_file_path1 + '.ok';
 
 
-
-    // find that can not append  parameter to the command
-    //     command = `
-    // am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
-    // -a com.termux.RUN_COMMAND \
-    // --es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/bash' \
-    // --esa com.termux.RUN_COMMAND_ARGUMENTS '${call_termux_exec_file_path},>,${miyk_output_file_path1}' \
-    // --es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
-    // --ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
-    // --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
-    //     `.trim();
     command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
@@ -559,7 +546,7 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 }
 
 function read_output_file_termux(output_file) {
-    let ok_output_file= output_file+'.ok';
+    let ok_output_file = output_file + '.ok';
 
     while (!autoxjsBuiltinApi.files.exists(ok_output_file)) {
         console.log("wait for the file to be created");
@@ -577,22 +564,28 @@ function read_output_file_termux(output_file) {
     return output;
 
 }
-function kill_app_by_call_termux(packageName) {
 
-    command = `
-am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
--a com.termux.RUN_COMMAND \
---es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/adb' \
---esa com.termux.RUN_COMMAND_ARGUMENTS 'shell,am,force-stop,${packageName}' \
---es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
---ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
---es com.termux.RUN_COMMAND_SESSION_ACTION '0'
-    `
-
-    toastAndlogAnd_showConsole_shell(command);
+function call_termux_by_file_with_result(call_termux_string_command) {
+    let output_file = call_termux_by_file(call_termux_string_command);
+    return read_output_file_termux(output_file);
 }
 
-function kill_current_app_by_call_termux(packageName) {
+function kill_app_by_call_termux(packageName) {
+
+
+    command = `
+    adb shell am force-stop ${packageName}
+    `
+    call_termux_by_file_with_result(command);
+    toastAndlogAnd_showConsole_shell(command);
+
+}
+
+
+
+function kill_current_app_by_call_termux() {
+    let current_packageName = get_current_app();
+    kill_app_by_call_termux(current_packageName);
 }
 function kill_current_app(__emunKillWay) {
 
@@ -694,20 +687,16 @@ function syn_lock_release(file_handle) {
 
 function get_current_app() {
 
-    let output_file = "/sdcard/脚本/result_from_call_termux.txt"
-    let basic_command = `
+    let command = `
 adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut -d '/' -f 1 
-`.trim();
-    let command = basic_command + ' > ' + output_file;
+`;
     call_termux(command);
-    // here should be wait until the termux call is finished ,but ,it is hard to do it in the autojs
-    sleep(1000 * 2);
+
+    let output_file = call_termux_by_file(command);
+    let current_packageName = read_output_file_termux(output_file);
 
 
-    let stdout = autoxjsBuiltinApi.files.read(output_file);
-
-
-    return stdout;
+    return current_packageName;
 }
 
 function is_dual_APP(packageName) {
@@ -803,6 +792,8 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 // toast("hello world");
 let tmp = call_termux_by_file("pwd ; echo 1111111 ; whoami");
-tmp = read_output_file_termux(tmp);
-console.log(tmp);
+// tmp = read_output_file_termux(tmp);
+// console.log(tmp);
 
+d(get_current_app());
+kill_current_app_by_call_termux()
