@@ -509,6 +509,29 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 }
 
 
+// 经过实验,可以读取文件本身,然后删除文件本身,至少对于小文件是可以的,因为小文件可以一次性读入内存
+// PROBLEM only read  stdout
+function call_termux_by_file(call_termux_string_command) {
+
+    let file_path_part = generateRandomString(26);
+    let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.bash`;
+
+    ensure_file_content(call_termux_exec_file_path, call_termux_string_command);
+    let miyk_output_file_path1 = '/sdcard/脚本/tmp_output_from_call_termux_' + file_path_part;
+
+    command = `
+am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
+-a com.termux.RUN_COMMAND \
+--es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/bash ${call_termux_exec_file_path}  > ${miyk_output_file_path1} && rm ${call_termux_exec_file_path}' \
+--esa com.termux.RUN_COMMAND_ARGUMENTS '' \
+--es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
+--ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
+--es com.termux.RUN_COMMAND_SESSION_ACTION '0'
+    `.trim();
+    toastAndlogAnd_showConsole_shell(command);
+    return miyk_output_file_path1;
+}
+
 function read_output_file_termux(output_file) {
     while (!autoxjsBuiltinApi.files.exists(output_file)) {
     }
@@ -574,7 +597,6 @@ function test_how_long_the_autojs_app_can_stay() {
 
 
 function ensure_file_content(file_path, text, encoding) {
-
     encoding = encoding || "utf8";
     files.ensureDir(file_path);
     return files.write(file_path, text, encoding)
