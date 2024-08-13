@@ -5,8 +5,8 @@ var autoxjsBuiltinApi = {};
 var tmp = files
 autoxjsBuiltinApi.files = tmp;
 
-tmp = open
-autoxjsBuiltinApi.files.open = tmp;
+// tmp = open
+// autoxjsBuiltinApi.files.open = tmp;
 
 // NOTE  this version can not directly set a value  in a non-exist key in a object
 
@@ -383,8 +383,10 @@ function toastAndlogAnd_showConsole_shell(command, is_root, is_show_console_on_d
         console.show();
     }
     if (result.code == 0) {
+        console.log("执行成功");
         toast("执行成功");
     } else {
+        console.log("执行失败！请到控制台查看错误信息");
         toast("执行失败！请到控制台查看错误信息");
     }
 
@@ -514,30 +516,48 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 function call_termux_by_file(call_termux_string_command) {
 
     let file_path_part = generateRandomString(26);
-    let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.bash`;
+    // let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.bash`;
+    let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.txt`;
+
+    call_termux_string_command = call_termux_string_command +`
+    rm ${call_termux_exec_file_path}
+    `.trimEnd();
 
     ensure_file_content(call_termux_exec_file_path, call_termux_string_command);
-    let miyk_output_file_path1 = '/sdcard/脚本/tmp_output_from_call_termux_' + file_path_part;
+    let miyk_output_file_path1 = '/sdcard/脚本/tmp_output_from_call_termux_' + file_path_part+'.txt';
 
+
+    // find that can not append  parameter to the command
+//     command = `
+// am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
+// -a com.termux.RUN_COMMAND \
+// --es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/bash' \
+// --esa com.termux.RUN_COMMAND_ARGUMENTS '${call_termux_exec_file_path},>,${miyk_output_file_path1}' \
+// --es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
+// --ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
+// --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
+//     `.trim();
     command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
---es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/bash ${call_termux_exec_file_path}  > ${miyk_output_file_path1} && rm ${call_termux_exec_file_path}' \
---esa com.termux.RUN_COMMAND_ARGUMENTS '' \
+--es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/bash' \
+--esa com.termux.RUN_COMMAND_ARGUMENTS '-c, bash  ${call_termux_exec_file_path}  &>  ${miyk_output_file_path1}' \
 --es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
 --ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
     `.trim();
+
+
     toastAndlogAnd_showConsole_shell(command);
     return miyk_output_file_path1;
 }
 
 function read_output_file_termux(output_file) {
     while (!autoxjsBuiltinApi.files.exists(output_file)) {
+        console.log("wait for the file to be created");
     }
-    let stdout = autoxjsBuiltinApi.files.read(output_file);
-    autoxjsBuiltinApi.files.remove(output_file);
-    return stdout;
+    let output = autoxjsBuiltinApi.files.read(output_file);
+    return output;
 
 }
 function kill_app_by_call_termux(packageName) {
@@ -755,7 +775,7 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-test();
+// test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
@@ -765,4 +785,7 @@ test();
 
 
 // toast("hello world");
+let tmp =call_termux_by_file("pwd");
+tmp =read_output_file_termux(tmp);
+console.log(tmp);
 
