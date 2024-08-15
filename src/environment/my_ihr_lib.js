@@ -549,7 +549,7 @@ function read_output_file_termux(output_file) {
     let ok_output_file = output_file + '.ok';
 
     while (!autoxjsBuiltinApi.files.exists(ok_output_file)) {
-        console.log("wait for the file to be created");
+        // console.log("wait for the file to be created");
     }
 
     // 这个的一般比termux先打开 下面的语句仅仅是测试 
@@ -571,14 +571,11 @@ function call_termux_by_file_with_result(call_termux_string_command) {
 }
 
 function kill_app_by_call_termux(packageName) {
-
-
     command = `
     adb shell am force-stop ${packageName}
     `
     call_termux_by_file_with_result(command);
     toastAndlogAnd_showConsole_shell(command);
-
 }
 
 
@@ -690,7 +687,7 @@ function get_current_app() {
     let command = `
 adb shell dumpsys activity activities | grep mFocusedA | awk '{print $3}' | cut -d '/' -f 1 
 `;
-    current_packageName= call_termux_by_file_with_result(command);
+    current_packageName = call_termux_by_file_with_result(command);
 
     return current_packageName;
 }
@@ -744,6 +741,21 @@ function todo() {
 
 }
 
+var launch_new_app_gesture_array = {
+    "com.kuaishou.nebula": [
+        function dual_1() {
+        },
+        function dual_2() {
+        },
+        function dual_2() {
+        },
+        function dual_2() {
+        },
+    ],
+
+
+
+}
 
 function __projectQuarck() {
     function enter_quarck_main_page() {
@@ -764,6 +776,20 @@ function test() {
 }
 
 
+
+function is_rooted() {
+
+}
+
+function is_termux_ok() {
+
+}
+function is_termux_adb_ok() {
+
+}
+
+
+
 function afterFunction(afterFunction, __classFunctionDirectly) {
     __classFunctionDirectly();
     afterFunction();
@@ -773,6 +799,16 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
     wrapeFunction();
     __classFunctionDirectly();
     wrapeFunction();
+}
+
+function gesture__click_first_app_on_the_dual_app() {
+
+
+}
+function launch_new_app_with_dual(packageName, number) {
+    number = number || 1;
+
+
 }
 
 // gesture__universal_swipe_up_in_xCenter();
@@ -792,3 +828,6 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 // d(get_current_app());
 // kill_current_app_by_call_termux()
+d(is_dual_APP(project_kyub_packageName));
+
+
