@@ -384,13 +384,12 @@ function toastAndlogAnd_showConsole_shell(command, is_root, is_show_console_on_d
     let is_root = is_root || false;
     let is_show_console_on_devices = is_show_console_on_devices || false;
     let result = shell(command, is_root);
-    autojs_builtin_log(result);
     if (is_show_console_on_devices) {
         console.show();
     }
     if (result.code == 0) {
-        console.log("执行成功");
-        toast("执行成功");
+        // console.log("执行成功");
+        // toast("执行成功");
     } else {
         console.log("执行失败！请到控制台查看错误信息");
         toast("执行失败！请到控制台查看错误信息");
@@ -498,15 +497,43 @@ function generateRandomString(length) {
 }
 
 
-function run_shell_try_it_all() {
-    // root
+function kill_app_try_it_all(packageName) {
+
+    run_shell_try_it_all(`am force-stop ${packageName}`);
+}
+
+
+function run_shell_try_it_all(command) {
+
+    let result;
+    if (is_rooted()) {
+        command = `su   <<EOF
+        ${command}
+EOF`;
+        result = toastAndlogAnd_showConsole_shell(command);
+    } else if (is_termux_nc_ok()) { 
+
+    } else if (is_termux_intent_ok()) {
+
+    }
 
     // termux by nc
     // termux by intent
     // none shell
+    return result;
 
 }
 
+function is_termux_nc_ok() {
+
+}
+function is_termux_intent_ok() {
+
+}
+
+function is_termux_adb_ok() {
+
+}
 function __test_termux_enviroment() {
     command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
@@ -517,6 +544,10 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 --ez com.termux.RUN_COMMAND_BACKGROUND 'false' \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
     `.trim()
+}
+function call_termux_by_nc(command) {
+
+
 }
 
 
@@ -812,7 +843,8 @@ function __getsure_launch_new_app_dual_array(packageName, number) {
     launch_app_dual_array(packageName, number);
     sleep_certian_time(1000 * 5);
     autoxjsBuiltinApi.back();
-    kill_app_by_call_termux(packageName);
+    // kill_app_by_call_termux(packageName);
+    kill_app_try_it_all(packageName);
     sleep_certian_time();
     launch_app_dual_array(packageName, number);
 
@@ -837,8 +869,18 @@ function test() {
 }
 
 
-
+// here has some bugs
 function is_rooted() {
+    let result = toastAndlogAnd_showConsole_shell("su -c whoami");
+    if (result.code == 0) {
+        result.result = "root";
+        return true;
+    } else {
+        return false;
+    }
+
+
+
 
 }
 
@@ -889,7 +931,10 @@ function launch_new_app_with_dual(packageName, number) {
 // d(get_current_app());
 // kill_current_app_by_call_termux()
 // d(is_dual_APP(project_kyub_packageName));
-// __getsure_launch_new_app_dual_array("com.kuaishou.nebula",0);
+__getsure_launch_new_app_dual_array("com.kuaishou.nebula",0);
 // enter_the_apps_folder("com.kuaishou.nebula");
-call_termux_by_file_with_result("ls");
+// call_termux_by_file_with_result("ls");
 
+// d(is_rooted());
+// d(run_shell_try_it_all("ls"));
+// kill_app_try_it_all("com.kuaishou.nebula");
