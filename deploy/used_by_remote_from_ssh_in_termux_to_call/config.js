@@ -1,0 +1,1 @@
+var output_log_file_name_used_by_remote_from_ssh_in_termux_to_call = "/sdcard/脚本/";

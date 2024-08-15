@@ -9,6 +9,8 @@ autoxjsBuiltinApi.click = autojs_builtin_click;
 autoxjsBuiltinApi.back = function () {
     back();
 }
+autoxjsBuiltinApi.files.open = open
+
 
 // tmp = open
 // autoxjsBuiltinApi.files.open = tmp;
@@ -426,6 +428,14 @@ function sleep_devices_dependient_base_on_default_time(time) {
 }
 
 
+function front_end_lock() {
+    tmp = autoxjsBuiltinApi.files.open("/sdcard/脚本/tmp_used_by_autoxjs_script_to_lock", "w");
+
+}
+
+function front_end_unlock(__classFilelock) {
+    __classFilelock.close();
+}
 
 var project_kyub_packageName = "com.kuaishou.nebula";
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
@@ -512,7 +522,7 @@ function run_shell_try_it_all(command) {
         ${command}
 EOF`;
         result = toastAndlogAnd_showConsole_shell(command);
-    } else if (is_termux_nc_ok()) { 
+    } else if (is_termux_nc_ok()) {
 
     } else if (is_termux_intent_ok()) {
 
@@ -916,7 +926,7 @@ function launch_new_app_with_dual(packageName, number) {
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-test();
+// test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
