@@ -5,6 +5,10 @@ var d = console.log;
 var autoxjsBuiltinApi = {};
 var tmp = files
 autoxjsBuiltinApi.files = tmp;
+autoxjsBuiltinApi.click = autojs_builtin_click;
+autoxjsBuiltinApi.back = function () {
+    back();
+}
 
 // tmp = open
 // autoxjsBuiltinApi.files.open = tmp;
@@ -292,6 +296,7 @@ function gesture__projectKyub__click_check_in_posision() {
     gesture__universal_click_xCenter_manyTime_10even_y();
 
 
+
 }
 const __projectGesture__next_video = (function () {
     const functions = [gesture__universal_swipe_up_in_xCenter0, gesture__universal_swipe_up_in_xCenter2];
@@ -315,7 +320,7 @@ function sleep_certian_time(time_long) {
 
 //BZ
 function stay_home_page_with_unlock() {
-    for (let index = 0; index < 2; index++) {
+    for (let index = 0; index < 3; index++) {
         home();
         sleep_certian_time();
     }
@@ -494,43 +499,63 @@ function generateRandomString(length) {
 
 
 
-function call_termux(call_termux_string_command) {
 
-    let file_path = generateRandomString(26);
-    let file_path1 = '/sdcard/脚本/' + file_path;
+function __test_termux_enviroment() {
     command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
---es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/${call_termux_string_command} > ${file_path1} ' \
+--es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/top' \
 --esa com.termux.RUN_COMMAND_ARGUMENTS '' \
---es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
+--es com.termux.RUN_COMMAND_WORKDIR '/daua/data/com.termux/files/home' \
 --ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
-    `.trim();
-    toastAndlogAnd_showConsole_shell(command);
-    return file_path1;
+    `.trim()
 }
 
 
 // 经过实验,可以读取文件本身,然后删除文件本身,至少对于小文件是可以的,因为小文件可以一次性读入内存
 // PROBLEM only read  stdout
-function call_termux_by_file(call_termux_string_command) {
 
-    let file_path_part = generateRandomString(26);
-    // let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.bash`;
-    let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.txt`;
 
-    // 删除一句是删除自己,此时已经完全读入内存中,所以可以删除文件
-    call_termux_string_command = call_termux_string_command + `
+
+
+function call_termux_by_file_with_result(call_termux_string_command) {
+    function read_output_file_termux(output_file) {
+        let ok_output_file = output_file + '.ok';
+
+        while (!autoxjsBuiltinApi.files.exists(ok_output_file)) {
+            // console.log("wait for the file to be created");
+        }
+
+        // 这个的一般比termux先打开 下面的语句仅仅是测试 
+        // autoxjsBuiltinApi.files.write(output_file, 'aaa');
+        // sleep(1000 * 2);
+
+
+        let output = autoxjsBuiltinApi.files.read(output_file);
+
+        autoxjsBuiltinApi.files.remove(output_file);
+        autoxjsBuiltinApi.files.remove(ok_output_file);
+        return output;
+
+    }
+    function call_termux_by_file(call_termux_string_command) {
+
+        let file_path_part = generateRandomString(26);
+        // let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.bash`;
+        let call_termux_exec_file_path = `/sdcard/脚本/tmp_for_call_termux_${file_path_part}.txt`;
+
+        // 删除一句是删除自己,此时已经完全读入内存中,所以可以删除文件
+        call_termux_string_command = call_termux_string_command + `
     rm ${call_termux_exec_file_path}
     `.trimEnd();
 
-    ensure_file_content(call_termux_exec_file_path, call_termux_string_command);
-    let miyk_output_file_path1 = '/sdcard/脚本/tmp_output_from_call_termux_' + file_path_part + '.txt';
-    let ok_miyk_output_file_path1 = miyk_output_file_path1 + '.ok';
+        ensure_file_content(call_termux_exec_file_path, call_termux_string_command);
+        let miyk_output_file_path1 = '/sdcard/脚本/tmp_output_from_call_termux_' + file_path_part + '.txt';
+        let ok_miyk_output_file_path1 = miyk_output_file_path1 + '.ok';
 
 
-    command = `
+        command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
 --es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/bash' \
@@ -541,31 +566,9 @@ am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
     `.trim();
 
 
-    toastAndlogAnd_showConsole_shell(command);
-    return miyk_output_file_path1;
-}
-
-function read_output_file_termux(output_file) {
-    let ok_output_file = output_file + '.ok';
-
-    while (!autoxjsBuiltinApi.files.exists(ok_output_file)) {
-        // console.log("wait for the file to be created");
+        toastAndlogAnd_showConsole_shell(command);
+        return miyk_output_file_path1;
     }
-
-    // 这个的一般比termux先打开 下面的语句仅仅是测试 
-    // autoxjsBuiltinApi.files.write(output_file, 'aaa');
-    // sleep(1000 * 2);
-
-
-    let output = autoxjsBuiltinApi.files.read(output_file);
-
-    autoxjsBuiltinApi.files.remove(output_file);
-    autoxjsBuiltinApi.files.remove(ok_output_file);
-    return output;
-
-}
-
-function call_termux_by_file_with_result(call_termux_string_command) {
     let output_file = call_termux_by_file(call_termux_string_command);
     return read_output_file_termux(output_file);
 }
@@ -584,6 +587,8 @@ function kill_current_app_by_call_termux() {
     let current_packageName = get_current_app();
     kill_app_by_call_termux(current_packageName);
 }
+
+
 function kill_current_app(__emunKillWay) {
 
 
@@ -741,9 +746,29 @@ function todo() {
 
 }
 
+// afer many ,last decide  to use gesture to launch more app
+function enter_the_apps_folder(packageName) {
+    let array_apps_folder_ways = {
+        "com.kuaishou.nebula": function () {
+            stay_home_page_with_unlock();
+            sleep_certian_time();
+            autoxjsBuiltinApi.click(128, 285);
+        },
+
+    }
+    return array_apps_folder_ways[packageName]();
+
+
+}
 var launch_new_app_gesture_array = {
     "com.kuaishou.nebula": [
         function dual_1() {
+            // click the folder of the app
+            autoxjsBuiltinApi.click(500, 2000);
+            sleep_certian_time();
+            // click the app_position
+            autoxjsBuiltinApi.click(500, 2000);
+
         },
         function dual_2() {
         },
@@ -757,6 +782,35 @@ var launch_new_app_gesture_array = {
 
 }
 
+// 这里应该使用yolo识别位置
+function launch_app_dual_array(packageName, number) {
+    number = number || 0;
+
+    let array = {
+        "com.kuaishou.nebula": [
+            function dual_0() {
+                autoxjsBuiltinApi.click(300, 720);
+
+            },
+        ],
+    }
+    enter_the_apps_folder(packageName);
+    sleep_certian_time(5 * 1000);
+    let result = array[packageName][number]();
+    return result;
+
+}
+
+function __getsure_launch_new_app_dual_array(packageName, number) {
+    launch_app_dual_array(packageName, number);
+    sleep_certian_time(1000 * 5);
+    autoxjsBuiltinApi.back();
+    kill_app_by_call_termux(packageName);
+    sleep_certian_time();
+    launch_app_dual_array(packageName, number);
+
+
+}
 function __projectQuarck() {
     function enter_quarck_main_page() {
         launch_new_app("com.quark.browser");
@@ -803,7 +857,6 @@ function wrappFunction(wrapeFunction, __classFunctionDirectly) {
 
 function gesture__click_first_app_on_the_dual_app() {
 
-
 }
 function launch_new_app_with_dual(packageName, number) {
     number = number || 1;
@@ -828,6 +881,8 @@ function launch_new_app_with_dual(packageName, number) {
 
 // d(get_current_app());
 // kill_current_app_by_call_termux()
-d(is_dual_APP(project_kyub_packageName));
-
+// d(is_dual_APP(project_kyub_packageName));
+// __getsure_launch_new_app_dual_array("com.kuaishou.nebula",0);
+// enter_the_apps_folder("com.kuaishou.nebula");
+call_termux_by_file_with_result("ls");
 
