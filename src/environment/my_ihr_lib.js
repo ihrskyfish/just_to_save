@@ -431,7 +431,8 @@ var project_kyub_packageName = "com.kuaishou.nebula";
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
 function project_kyub() {
     function enter_kyub_main_page() {
-        launch_new_app(project_kyub_packageName);
+        // launch_new_app(project_kyub_packageName);
+        __getsure_launch_new_app_dual_array(project_kyub_packageName, 0);
     }
 
     function enter_kyub_vrqm_page() {
@@ -915,7 +916,7 @@ function launch_new_app_with_dual(packageName, number) {
 
 // gesture__universal_swipe_up_in_xCenter();
 // kill_current_app();
-// test();
+test();
 // kill_current_app();
 // gesture_kill_current_app_on_the_recents_page();
 // device.getAndroidId();
@@ -931,7 +932,7 @@ function launch_new_app_with_dual(packageName, number) {
 // d(get_current_app());
 // kill_current_app_by_call_termux()
 // d(is_dual_APP(project_kyub_packageName));
-__getsure_launch_new_app_dual_array("com.kuaishou.nebula",0);
+// __getsure_launch_new_app_dual_array("com.kuaishou.nebula",0);
 // enter_the_apps_folder("com.kuaishou.nebula");
 // call_termux_by_file_with_result("ls");
 
