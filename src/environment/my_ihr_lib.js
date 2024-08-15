@@ -498,16 +498,23 @@ function generateRandomString(length) {
 }
 
 
+function run_shell_try_it_all() {
+    // root
 
+    // termux by nc
+    // termux by intent
+    // none shell
+
+}
 
 function __test_termux_enviroment() {
     command = `
 am startservice --user 0 -n com.termux/com.termux.app.RunCommandService \
 -a com.termux.RUN_COMMAND \
 --es com.termux.RUN_COMMAND_PATH '/data/data/com.termux/files/usr/bin/top' \
---esa com.termux.RUN_COMMAND_ARGUMENTS '' \
---es com.termux.RUN_COMMAND_WORKDIR '/daua/data/com.termux/files/home' \
---ez com.termux.RUN_COMMAND_BACKGROUND 'true' \
+--esa com.termux.RUN_COMMAND_ARGUMENTS '-n,5' \
+--es com.termux.RUN_COMMAND_WORKDIR '/data/data/com.termux/files/home' \
+--ez com.termux.RUN_COMMAND_BACKGROUND 'false' \
 --es com.termux.RUN_COMMAND_SESSION_ACTION '0'
     `.trim()
 }
