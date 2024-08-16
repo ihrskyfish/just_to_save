@@ -1,0 +1,1 @@
+it is  better that copy and run file  from remote  than  directly run file from  remote
