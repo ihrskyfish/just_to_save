@@ -439,10 +439,11 @@ function front_end_unlock(__classFilelock) {
 
 var project_kyub_packageName = "com.kuaishou.nebula";
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
-function project_kyub() {
+function project_kyub(  launch_function ) {
     function enter_kyub_main_page() {
         // launch_new_app(project_kyub_packageName);
         __getsure_launch_new_app_dual_array(project_kyub_packageName, 0);
+        launch_function();
     }
 
     function enter_kyub_vrqm_page() {
@@ -841,6 +842,7 @@ function launch_app_dual_array(packageName, number) {
                 autoxjsBuiltinApi.click(300, 720);
 
             },
+
         ],
     }
     enter_the_apps_folder(packageName);
@@ -949,3 +951,4 @@ function launch_new_app_with_dual(packageName, number) {
 // d(is_rooted());
 // d(run_shell_try_it_all("ls"));
 // kill_app_try_it_all("com.kuaishou.nebula");
+
