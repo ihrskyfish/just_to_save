@@ -380,6 +380,25 @@ function run_shell(__enumPrivilege, command) {
     return result;
 
 }
+
+function randomSleep(__classMilliseconds_start_random, __classMilliseconds_end_random) {
+
+    function __version1() {
+        const randomTime = Math.floor(Math.random() * __classMilliseconds_end_random) + __classMilliseconds_start_random; 
+        sleep(randomTime);
+    }
+    function __version2() {
+        const start = new Date().getTime();
+        while (new Date().getTime() - start < milliseconds) {
+            // 忙等待
+        }
+    }
+
+    __version1();
+
+}
+
+
 // the difference between the adb shell and root shell is that adbShellCommad is the concat of string"adb shell" and RootShellCommand   
 function project_kyub() {
 
@@ -432,7 +451,8 @@ function project_kyub() {
         let currentTime = Date.now();
         while (Date.now() - currentTime < 1000 * 60 * minute) {
             gesture__universal_swipe_up_in_xCenter();
-            sleep_certian_time(1000 * 6);
+            randomSleep(1000 * 2, 1000 * 6);
+
 
         }
     }
