@@ -464,7 +464,7 @@ function project_kyub() {
         minute = minute || 10;
         enter_kyub_main_page();
         sleep_certian_time(1000 * 6);
-        minutes = 10;
+        minute = 10;
         let currentTime = Date.now();
         while (Date.now() - currentTime < 1000 * 60 * minute) {
             __projectGesture__next_video();
