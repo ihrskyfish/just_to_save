@@ -468,7 +468,7 @@ function project_kyub() {
         let currentTime = Date.now();
         while (Date.now() - currentTime < 1000 * 60 * minute) {
             __projectGesture__next_video();
-            randomSleep(1000 * 2, 1000 * 6);
+            randomSleep(1000 * 2, 1000 * 12);
 
         }
     }
